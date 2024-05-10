@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tensorflow/boxwidget.dart';
-import 'package:tensorflow/camera_settings.dart';
-import 'package:tensorflow/cameraview.dart';
-import 'package:tensorflow/recognition.dart';
+import 'package:mapda/screen/object_recognition/boxwidget.dart';
+import 'package:mapda/screen/object_recognition/camera_settings.dart';
+import 'package:mapda/screen/object_recognition/cameraview.dart';
+import 'package:mapda/screen/object_recognition/recognition.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

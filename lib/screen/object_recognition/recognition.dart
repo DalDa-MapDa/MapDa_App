@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
-import 'package:tensorflow/camera_settings.dart';
+import 'package:mapda/screen/object_recognition/camera_settings.dart';
 
 class Recognition {
   // 인식된 객체의 ID 저장

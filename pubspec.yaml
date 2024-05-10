@@ -1,4 +1,4 @@
-name: tensorflow
+name: mapda
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -37,8 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.6
   camera: ^0.9.8+1
   tflite_flutter: ^0.9.1
-  tflite_flutter_helper: ^0.3.1
+  tflite_flutter_helper: 0.2.1
   image: ^3.3.0
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +66,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/icon/
+    - assets/icon/other/
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -89,6 +93,37 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+  fonts:
+    - family: pretendard
+      fonts:
+        - asset: assets/fonts/pretendard/Pretendard-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/pretendard/Pretendard-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/pretendard/Pretendard-Light.ttf
+          weight: 300
+        - asset: assets/fonts/pretendard/Pretendard-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/pretendard/Pretendard-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/pretendard/Pretendard-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/pretendard/Pretendard-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/pretendard/Pretendard-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/pretendard/Pretendard-Black.ttf
+          weight: 900
+    - family: yangjin
+      fonts:
+        - asset: assets/fonts/yang_jin/yangjin.otf
+          weight: 100
+
+
+
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+

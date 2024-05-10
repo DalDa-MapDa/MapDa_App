@@ -1,11 +1,11 @@
-// ignore_for_file: library_prefixes
+// ignore_for_file: library_prefixes, unused_field
 
 import 'dart:async';
 import 'dart:isolate';
 import 'package:camera/camera.dart';
 import 'package:image/image.dart' as imageLib;
-import 'package:tensorflow/classifier.dart';
-import 'package:tensorflow/imageutils.dart';
+import 'package:mapda/screen/object_recognition/classifier.dart';
+import 'package:mapda/screen/object_recognition/imageutils.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 class IsolateUtils {

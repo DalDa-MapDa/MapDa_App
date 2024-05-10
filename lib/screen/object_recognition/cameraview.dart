@@ -1,10 +1,10 @@
 import 'dart:isolate';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:tensorflow/camera_settings.dart';
-import 'package:tensorflow/classifier.dart';
-import 'package:tensorflow/isolateutils.dart';
-import 'package:tensorflow/recognition.dart';
+import 'package:mapda/screen/object_recognition/camera_settings.dart';
+import 'package:mapda/screen/object_recognition/classifier.dart';
+import 'package:mapda/screen/object_recognition/isolateutils.dart';
+import 'package:mapda/screen/object_recognition/recognition.dart';
 
 //각 프레임을 추론에 전달하는 CameraView
 class CameraView extends StatefulWidget {
@@ -53,8 +53,8 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
   void initializeCamera() async {
     cameras = await availableCameras();
     // cameras[0]은 후면 카메라
-    cameraController =
-        CameraController(cameras![0], ResolutionPreset.low, enableAudio: false);
+    cameraController = CameraController(cameras![0], ResolutionPreset.medium,
+        enableAudio: false);
     cameraController?.initialize().then((_) async {
       // onLatestImageAvailable 함수를 전달하여 각 프레임에 대한 인식을 수행
       await cameraController?.startImageStream(onLatestImageAvailable);
