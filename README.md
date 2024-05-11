@@ -1,19 +1,7 @@
-# tensorflow
+# 24년_현대오토에버 배리어프리 앱 개밸 콘테스트
+Team 달다(Dal:da) - 조은애/이지현/이유철
 
-A new Flutter project.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# TensorFlow_ObjectRecognition
-# MapDa_App
-# MapDa_App
+## 기획 내용 중 객체 인식을 통한 캠퍼스 내 위험물체 신고 간소화
+텐서플로우 SSD(Single Shot Multi-box Detector) 모델을 이용하여 위험물체를 학습 시켜
+비장애인의 캠퍼스 안전지도 동참 과정의 이탈요인을 줄입니다.
