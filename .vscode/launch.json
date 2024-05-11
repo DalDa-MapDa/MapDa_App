@@ -7,22 +7,19 @@
         {
             "name": "MapDa",
             "request": "launch",
-            "type": "dart",
-            "program": "lib/screen/main.dart"
+            "type": "dart"
         },
         {
             "name": "MapDa (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile",
-            "program": "lib/screen/main.dart"
+            "flutterMode": "profile"
         },
         {
             "name": "MapDa (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release",
-            "program": "lib/screen/main.dart"
+            "flutterMode": "release"
         }
     ]
 }

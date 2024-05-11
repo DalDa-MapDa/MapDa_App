@@ -1,8 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
-import 'package:mapda/screen/object_recognition/boxwidget.dart';
-import 'package:mapda/screen/object_recognition/camera_settings.dart';
-import 'package:mapda/screen/object_recognition/cameraview.dart';
-import 'package:mapda/screen/object_recognition/recognition.dart';
+import 'package:mapda/constants/constants.dart';
+import 'package:mapda/manage/screen_mange.dart';
+import 'dart:ui' as ui;
+import 'package:flutter/rendering.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -12,6 +14,8 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final GlobalKey _cameraViewKey = GlobalKey(); // 스크린샷을 위한 키 추가
+
   /// Results to draw bounding boxes
   List<Recognition>? results;
 
@@ -26,38 +30,64 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.p_1,
         title: const Text(
-          '객체 인식 예제',
+          '현대오토에버\n배리어프리 공모전 프로토타입',
           style: TextStyle(
               fontWeight: FontWeight.w600, color: Colors.white, fontSize: 15),
         ),
       ),
       body: Stack(
         children: [
-          CameraView(resultsCallback, updateElapsedTimeCallback),
-          boundingBoxes(results),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  resultsList(results),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        statsRow('이미지 추론 시간:', '$totalElapsedTime ms'),
-                        statsRow('이미지 크기',
-                            '${CameraSettings.inputImageSize?.width} X ${CameraSettings.inputImageSize?.height}'),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
+          RepaintBoundary(
+            key: _cameraViewKey,
+            child: CameraView(resultsCallback, updateElapsedTimeCallback),
           ),
+          boundingBoxes(results),
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: SingleChildScrollView(
+          //     child: Column(
+          //       children: [
+          //         resultsList(results),
+          //         Padding(
+          //           padding: const EdgeInsets.all(10.0),
+          //           child: Column(
+          //             children: [
+          //               statsRow('이미지 추론 시간:', '$totalElapsedTime ms'),
+          //               statsRow('이미지 크기',
+          //                   '${CameraSettings.inputImageSize?.width} X ${CameraSettings.inputImageSize?.height}'),
+          //             ],
+          //           ),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
+      ),
+    );
+  }
+
+  // 스크린샷 캡처 함수
+  Future<ui.Image> captureCameraView() async {
+    RenderRepaintBoundary boundary = _cameraViewKey.currentContext!
+        .findRenderObject()! as RenderRepaintBoundary;
+    ui.Image image = await boundary.toImage();
+    return image;
+  }
+
+  // 사물을 탭할 때의 함수
+  void _thisObjectTap({required String thisObjectName}) async {
+    print('실행됨');
+    ui.Image image = await captureCameraView(); // 스크린샷 캡처
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ObjectRegisterHome(
+          thisObjectName: thisObjectName,
+          image: image, // 스크린샷 이미지를 전달
+        ),
       ),
     );
   }
@@ -69,9 +99,13 @@ class _HomeViewState extends State<HomeView> {
     }
     return Stack(
       children: results
-          .map((e) => BoxWidget(
-                result: e,
-              ))
+          .map(
+            (e) => BoxWidget(
+              result: e,
+              thisObjectTap: () =>
+                  _thisObjectTap(thisObjectName: results[0].label!),
+            ),
+          )
           .toList(),
     );
   }

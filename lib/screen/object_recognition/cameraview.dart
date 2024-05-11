@@ -16,10 +16,10 @@ class CameraView extends StatefulWidget {
   const CameraView(this.resultsCallback, this.updateElapsedTimeCallback,
       {super.key});
   @override
-  _CameraViewState createState() => _CameraViewState();
+  CameraViewState createState() => CameraViewState();
 }
 
-class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
+class CameraViewState extends State<CameraView> with WidgetsBindingObserver {
   // 사용 가능한 카메라 목록
   List<CameraDescription>? cameras;
   // 카메라 컨트롤러

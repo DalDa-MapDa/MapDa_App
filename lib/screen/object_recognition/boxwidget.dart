@@ -3,8 +3,13 @@ import 'package:mapda/screen/object_recognition/recognition.dart';
 
 class BoxWidget extends StatelessWidget {
   final Recognition result;
+  final VoidCallback thisObjectTap;
   // BoxWidget 생성자
-  const BoxWidget({super.key, required this.result});
+  const BoxWidget({
+    super.key,
+    required this.result,
+    required this.thisObjectTap,
+  });
   @override
   Widget build(BuildContext context) {
     // 결과에 따라 색상을 설정
@@ -18,24 +23,29 @@ class BoxWidget extends StatelessWidget {
       top: result.renderLocation.top,
       width: result.renderLocation.width,
       height: result.renderLocation.height,
-      child: Container(
-        width: result.renderLocation.width,
-        height: result.renderLocation.height,
-        // 경계 상자의 테두리
-        decoration: BoxDecoration(
-          border: Border.all(color: color, width: 3),
-        ),
-        child: Align(
-          alignment: Alignment.topLeft,
-          child: FittedBox(
-            // 인식된 객체의 레이블과 확률 표시
-            child: Container(
-              color: color,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text('${result.label}  ${result.score!.toStringAsFixed(2)}'),
-                ],
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: thisObjectTap,
+        child: Container(
+          width: result.renderLocation.width,
+          height: result.renderLocation.height,
+          // 경계 상자의 테두리
+          decoration: BoxDecoration(
+            border: Border.all(color: color, width: 3),
+          ),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: FittedBox(
+              // 인식된 객체의 레이블과 확률 표시
+              child: Container(
+                color: color,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                        '${result.label}  ${result.score!.toStringAsFixed(2)}'),
+                  ],
+                ),
               ),
             ),
           ),
