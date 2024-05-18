@@ -53,8 +53,8 @@ class CameraViewState extends State<CameraView> with WidgetsBindingObserver {
   void initializeCamera() async {
     cameras = await availableCameras();
     // cameras[0]은 후면 카메라
-    cameraController = CameraController(cameras![0], ResolutionPreset.medium,
-        enableAudio: false);
+    cameraController =
+        CameraController(cameras![0], ResolutionPreset.low, enableAudio: false);
     cameraController?.initialize().then((_) async {
       // onLatestImageAvailable 함수를 전달하여 각 프레임에 대한 인식을 수행
       await cameraController?.startImageStream(onLatestImageAvailable);

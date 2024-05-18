@@ -1,4 +1,4 @@
-package com.example.tensorflow
+package com.dalda.mapda;
 
 import io.flutter.embedding.android.FlutterActivity
 
