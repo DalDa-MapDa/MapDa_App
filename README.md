@@ -8,3 +8,5 @@ Team 달다(Dal:da) - 조은애/이지현/이유철 | 지도 교수: 신혜련 �
 
 ## 프로토타입 시연
 ![GIFMaker_me](https://github.com/DalDa-MapDa/MapDa_App/assets/67686124/873797dd-c041-4743-95bc-435a1a05f55d)
+
+[프로토타입 설치 링크](https://drive.google.com/file/d/12isYQ6CEGtyLlMrJupWNPPl-f5C8F7FV/view?usp=sharing)
