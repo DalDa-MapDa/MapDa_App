@@ -79,7 +79,6 @@ class _HomeViewState extends State<HomeView> {
 
   // 사물을 탭할 때의 함수
   void _thisObjectTap({required String thisObjectName}) async {
-    print('실행됨');
     ui.Image image = await captureCameraView(); // 스크린샷 캡처
     Navigator.push(
       context,
