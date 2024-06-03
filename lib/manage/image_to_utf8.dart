@@ -39,7 +39,6 @@ Future<Uint8List> convertYUV420toImageByte(CameraImage image) async {
     List<int> jpg = jpgEncoder.encodeImage(img);
     return Uint8List.fromList(jpg);
   } catch (e) {
-    print("Error converting image: $e");
     return Uint8List(0);
   }
 }

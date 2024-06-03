@@ -45,18 +45,14 @@ class Classifier {
         _outputShapes?.add(tensor.shape);
         _outputTypes?.add(tensor.type);
       });
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   // 레이블 로드
   void loadLabels({List<String>? labels}) async {
     try {
       _labels = labels ?? await FileUtil.loadLabels("assets/$LABEL_FILE_NAME");
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   // 입력 이미지를 처리
