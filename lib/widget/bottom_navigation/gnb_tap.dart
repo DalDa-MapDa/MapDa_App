@@ -31,8 +31,9 @@ class GnbTap extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Gaps.v12,
               isSelected ? selecetedIcon : unselecetedIcon,
-              Gaps.v2,
+              Gaps.v8,
               Text(
                 text,
                 style: TextStyle(
@@ -42,6 +43,7 @@ class GnbTap extends StatelessWidget {
                   color: isSelected ? AppColors.p_7_base : AppColors.g_5,
                 ),
               ),
+              Gaps.v12,
             ],
           ),
         ),

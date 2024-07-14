@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mapda/constants/color_table.dart';
-import 'package:mapda/constants/gaps.dart';
-import 'package:mapda/constants/icon_table.dart';
+import 'package:mapda/constants/constants.dart';
 import 'package:mapda/manage/screen_mange.dart';
 
 void main() async {
@@ -15,9 +13,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeManage.theme,
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

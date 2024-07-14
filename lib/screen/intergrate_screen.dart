@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:mapda/constants/constants.dart';
 import 'package:mapda/manage/screen_mange.dart';
@@ -86,12 +84,10 @@ class _IntergrateScreenState extends State<IntergrateScreen> {
         return const CameraHomeScreen();
       case 1:
         return const CameraHomeScreen();
-
       case 2:
         return const CameraHomeScreen();
       case 3:
         return const CameraHomeScreen();
-
       default:
         return const CameraHomeScreen();
     }
@@ -101,53 +97,57 @@ class _IntergrateScreenState extends State<IntergrateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _getCurrentScreen(),
-      bottomNavigationBar: BottomAppBar(
-        height: 56,
-        elevation: 0,
-        color: const Color.fromRGBO(0, 0, 0, 0),
-        child: Column(
-          children: [
-            Gaps.v8,
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // 각 탭 구성
-                GnbTap(
-                  text: '교외 지원',
-                  isSelected: _selectedIndex == 0,
-                  onTap: () => _onTap(0),
-                  selectedIndex: _selectedIndex,
-                  selecetedIcon: AppIcon.gnb_map_24_actived,
-                  unselecetedIcon: AppIcon.gnb_map_24_inactived,
-                ),
-                GnbTap(
-                  text: '교내 지원',
-                  isSelected: _selectedIndex == 1,
-                  onTap: () => _onTap(1),
-                  selectedIndex: _selectedIndex,
-                  selecetedIcon: AppIcon.gnb_camera_24_actived,
-                  unselecetedIcon: AppIcon.gnb_camera_24_inactived,
-                ),
-                GnbTap(
-                  text: '홈',
-                  isSelected: _selectedIndex == 2,
-                  onTap: () => _onTap(2),
-                  selectedIndex: _selectedIndex,
-                  selecetedIcon: AppIcon.gnb_flag_24_actived,
-                  unselecetedIcon: AppIcon.gnb_flag_24_inactived,
-                ),
-                GnbTap(
-                  text: '로드맵',
-                  isSelected: _selectedIndex == 3,
-                  onTap: () => _onTap(3),
-                  selectedIndex: _selectedIndex,
-                  selecetedIcon: AppIcon.gnb_userprofile_24_actived,
-                  unselecetedIcon: AppIcon.gnb_userprofile_24_inactived,
-                ),
-              ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: const Offset(0, -1), // 그림자의 위치 조정
             ),
           ],
+        ),
+        child: BottomAppBar(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // 각 탭 구성
+              GnbTap(
+                text: '홈',
+                isSelected: _selectedIndex == 0,
+                onTap: () => _onTap(0),
+                selectedIndex: _selectedIndex,
+                selecetedIcon: AppIcon.gnb_map_24_actived,
+                unselecetedIcon: AppIcon.gnb_map_24_inactived,
+              ),
+              GnbTap(
+                text: '객체인식',
+                isSelected: _selectedIndex == 1,
+                onTap: () => _onTap(1),
+                selectedIndex: _selectedIndex,
+                selecetedIcon: AppIcon.gnb_camera_24_actived,
+                unselecetedIcon: AppIcon.gnb_camera_24_inactived,
+              ),
+              GnbTap(
+                text: '캠퍼스',
+                isSelected: _selectedIndex == 2,
+                onTap: () => _onTap(2),
+                selectedIndex: _selectedIndex,
+                selecetedIcon: AppIcon.gnb_flag_24_actived,
+                unselecetedIcon: AppIcon.gnb_flag_24_inactived,
+              ),
+              GnbTap(
+                text: '마이',
+                isSelected: _selectedIndex == 3,
+                onTap: () => _onTap(3),
+                selectedIndex: _selectedIndex,
+                selecetedIcon: AppIcon.gnb_userprofile_24_actived,
+                unselecetedIcon: AppIcon.gnb_userprofile_24_inactived,
+              ),
+            ],
+          ),
         ),
       ),
     );

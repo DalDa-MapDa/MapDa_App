@@ -30,11 +30,11 @@ class _CameraHomeScreenState extends State<CameraHomeScreen> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: AppColors.p_1,
+        backgroundColor: AppColors.s_w,
         title: const Text(
-          '현대오토에버\n배리어프리 공모전 프로토타입',
+          '위험 물체 인식',
           style: TextStyle(
-              fontWeight: FontWeight.w600, color: Colors.white, fontSize: 15),
+              fontWeight: FontWeight.w600, color: AppColors.s_b, fontSize: 15),
         ),
       ),
       body: Stack(
