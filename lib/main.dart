@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:mapda/constants/color_table.dart';
 import 'package:mapda/constants/gaps.dart';
 import 'package:mapda/constants/icon_table.dart';
-import 'package:mapda/screen/object_recognition/home_screen.dart';
+import 'package:mapda/manage/screen_mange.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +47,7 @@ class SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeView(),
+            builder: (context) => const IntergrateScreen(),
           ),
         );
         SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -65,8 +65,8 @@ class SplashScreenState extends State<SplashScreen> {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
             colors: [
               Color(0xffFF8D8D),
               Color(0xffFF5C5C),
@@ -88,19 +88,6 @@ class SplashScreenState extends State<SplashScreen> {
                     fontWeight: FontWeight.bold,
                     height: 44 / 40),
               ),
-              const Spacer(),
-              const Text(
-                '현대오토에버와 서울사회복지공동모금회가\n지원하는 배리어프리 앱 개발 콘테스트의 출품작입니다.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'pretendard',
-                  fontSize: 10,
-                  color: AppColors.s_w,
-                  height: 14 / 10,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Gaps.v48,
             ],
           ),
         ),

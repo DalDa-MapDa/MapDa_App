@@ -6,14 +6,14 @@ import 'package:mapda/manage/screen_mange.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/rendering.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+class CameraHomeScreen extends StatefulWidget {
+  const CameraHomeScreen({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<CameraHomeScreen> createState() => _CameraHomeScreenState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _CameraHomeScreenState extends State<CameraHomeScreen> {
   final GlobalKey _cameraViewKey = GlobalKey(); // 스크린샷을 위한 키 추가
 
   /// Results to draw bounding boxes

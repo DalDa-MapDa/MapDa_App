@@ -8,4 +8,30 @@ class AppIcon {
   static Widget get splash_logo =>
       SvgPicture.asset('assets/icon/other/splash_logo.svg',
           fit: BoxFit.scaleDown);
+
+  // bottom navigation bar icons
+  static Widget get gnb_camera_24_actived =>
+      SvgPicture.asset('assets/icon/24/gnb_part/camera_24_actived.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get gnb_camera_24_inactived =>
+      SvgPicture.asset('assets/icon/24/gnb_part/camera_24_inactived.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get gnb_flag_24_actived =>
+      SvgPicture.asset('assets/icon/24/gnb_part/flag_24_actived.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get gnb_flag_24_inactived =>
+      SvgPicture.asset('assets/icon/24/gnb_part/flag_24_inactived.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get gnb_map_24_actived =>
+      SvgPicture.asset('assets/icon/24/gnb_part/map_24_actived.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get gnb_map_24_inactived =>
+      SvgPicture.asset('assets/icon/24/gnb_part/map_24_inactived.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get gnb_userprofile_24_actived =>
+      SvgPicture.asset('assets/icon/24/gnb_part/userprofile_24_actived.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get gnb_userprofile_24_inactived =>
+      SvgPicture.asset('assets/icon/24/gnb_part/userprofile_24_inactived.svg',
+          fit: BoxFit.scaleDown);
 }

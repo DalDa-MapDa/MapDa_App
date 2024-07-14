@@ -5,9 +5,12 @@ export 'package:mapda/screen/object_recognition/cameraview.dart'; //카메라 �
 export 'package:mapda/screen/object_recognition/recognition.dart'; //인식 결과
 export 'package:mapda/screen/object_recognition/classifier.dart'; //모델을 사용하여 객체를 인식하는 클래스
 export 'package:mapda/screen/object_recognition/isolateutils.dart'; //Isolate를 사용하여 추론을 수행하는 클래스
-export 'package:mapda/screen/object_recognition/home_screen.dart'; //객체 인식 화면
+export 'package:mapda/screen/object_recognition/camera_home_screen.dart'; //객체 인식 화면
 export 'package:mapda/screen/object_recognition/imageutils.dart'; //이미지 처리 유틸리티
 
 //Object 등록화면
 export 'package:mapda/screen/object_register_screen/object_register_home.dart'; //객체 등록 화면
+
+//Bottom Navigation Bar화면
+export 'package:mapda/screen/intergrate_screen.dart'; //GNB 통합화면
 

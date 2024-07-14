@@ -49,7 +49,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/tflite_flutter/ios"
 
 SPEC CHECKSUMS:
-  camera_avfoundation: 759172d1a77ae7be0de08fc104cfb79738b8a59e
+  camera_avfoundation: dd002b0330f4981e1bbcb46ae9b62829237459a4
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   location: d5cf8598915965547c3f36761ae9cc4f4e87d22e
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
