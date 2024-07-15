@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mapda/screen/object_recognition/recognition.dart';
+import 'package:mapda/screen/object_register_screen/object_recognition/recognition.dart';
 
 class BoxWidget extends StatelessWidget {
   final Recognition result;

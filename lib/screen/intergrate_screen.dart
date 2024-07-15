@@ -35,7 +35,7 @@ class IntergrateScreen extends StatefulWidget {
 }
 
 class _IntergrateScreenState extends State<IntergrateScreen> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -81,7 +81,7 @@ class _IntergrateScreenState extends State<IntergrateScreen> {
   Widget _getCurrentScreen() {
     switch (_selectedIndex) {
       case 0:
-        return const CameraHomeScreen();
+        return const MainHome();
       case 1:
         return const CameraHomeScreen();
       case 2:

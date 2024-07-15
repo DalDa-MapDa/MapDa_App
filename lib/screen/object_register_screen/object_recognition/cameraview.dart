@@ -1,10 +1,10 @@
 import 'dart:isolate';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:mapda/screen/object_recognition/camera_settings.dart';
-import 'package:mapda/screen/object_recognition/classifier.dart';
-import 'package:mapda/screen/object_recognition/isolateutils.dart';
-import 'package:mapda/screen/object_recognition/recognition.dart';
+import 'package:mapda/screen/object_register_screen/object_recognition/camera_settings.dart';
+import 'package:mapda/screen/object_register_screen/object_recognition/classifier.dart';
+import 'package:mapda/screen/object_register_screen/object_recognition/isolateutils.dart';
+import 'package:mapda/screen/object_register_screen/object_recognition/recognition.dart';
 
 //각 프레임을 추론에 전달하는 CameraView
 class CameraView extends StatefulWidget {

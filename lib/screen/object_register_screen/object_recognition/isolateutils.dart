@@ -4,8 +4,8 @@ import 'dart:async';
 import 'dart:isolate';
 import 'package:camera/camera.dart';
 import 'package:image/image.dart' as imageLib;
-import 'package:mapda/screen/object_recognition/classifier.dart';
-import 'package:mapda/screen/object_recognition/imageutils.dart';
+import 'package:mapda/screen/object_register_screen/object_recognition/classifier.dart';
+import 'package:mapda/screen/object_register_screen/object_recognition/imageutils.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 class IsolateUtils {
