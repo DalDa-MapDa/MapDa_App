@@ -1,11 +1,22 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:mapda/constants/constants.dart';
 import 'package:mapda/manage/screen_mange.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await _naverMapInitailize();
   runApp(const MyApp());
+}
+
+Future<void> _naverMapInitailize() async {
+  await NaverMapSdk.instance.initialize(
+    clientId: 'piicuaz1z8',
+    onAuthFailed: (e) => print('네이버 지도 인증 실패: $e'),
+  );
 }
 
 class MyApp extends StatelessWidget {

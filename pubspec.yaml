@@ -41,6 +41,8 @@ dependencies:
   image: ^3.3.0
   flutter_svg: ^2.0.10+1
   location: ^6.0.2
+  flutter_naver_map: ^1.2.3+1
+  flutter_secure_storage: ^9.2.2
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +71,7 @@ flutter:
     - assets/
     - assets/icon/
     - assets/icon/other/
+    - assets/icon/24/
     - assets/icon/24/gnb_part/
 
 

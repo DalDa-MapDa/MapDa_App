@@ -11,6 +11,11 @@ class ThemeManage {
         height: 70,
         elevation: 1,
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: AppTextStyles.R_16.copyWith(color: AppColors.g_5),
+        enabledBorder: InputBorder.none,
+        focusedBorder: InputBorder.none,
+      ),
     );
   }
 }

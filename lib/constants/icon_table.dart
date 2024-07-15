@@ -34,4 +34,8 @@ class AppIcon {
   static Widget get gnb_userprofile_24_inactived =>
       SvgPicture.asset('assets/icon/24/gnb_part/userprofile_24_inactived.svg',
           fit: BoxFit.scaleDown);
+
+  // 24 사이즈 아이콘
+  static Widget get search_24 =>
+      SvgPicture.asset('assets/icon/24/search_24.svg', fit: BoxFit.scaleDown);
 }
