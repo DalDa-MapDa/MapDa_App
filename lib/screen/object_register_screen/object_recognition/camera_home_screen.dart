@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:mapda/constants/constants.dart';
+import 'package:mapda/constants/definition/constants.dart';
 import 'package:mapda/manage/screen_mange.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/rendering.dart';

@@ -1,7 +1,7 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:mapda/constants/gaps.dart';
+import 'package:mapda/constants/definition/gaps.dart';
 
 class ObjectRegisterHome extends StatefulWidget {
   final String thisObjectName;
