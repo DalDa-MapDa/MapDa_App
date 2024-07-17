@@ -84,4 +84,11 @@ class AppTextStyles {
     fontSize: 12,
     height: 18 / 12,
   );
+
+  static const TextStyle button_B_14 = TextStyle(
+      fontFamily: 'pretendard',
+      fontWeight: FontWeight.w700,
+      fontSize: 14,
+      height: 20 / 14,
+      letterSpacing: 0.1);
 }

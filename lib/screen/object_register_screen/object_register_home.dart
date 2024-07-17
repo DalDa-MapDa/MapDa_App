@@ -25,6 +25,7 @@ class _ObjectRegisterHomeState extends State<ObjectRegisterHome> {
   void initState() {
     super.initState();
     _retrieveLocation();
+    print('이미지 포맷: ${widget.image}');
   }
 
   void _retrieveLocation() async {

@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: DraggableScrollableSheet(
         snap: true,
         minChildSize: 0.1,
-        maxChildSize: 0.9,
+        maxChildSize: 0.7,
         initialChildSize: 0.3,
         builder: (BuildContext context, ScrollController scrollController) {
           return Container(
