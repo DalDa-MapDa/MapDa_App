@@ -2,8 +2,16 @@ PODS:
   - camera_avfoundation (0.0.1):
     - Flutter
   - Flutter (1.0.0)
+  - flutter_naver_map (1.2.3):
+    - Flutter
+    - NMapsMap (= 3.18.1)
+  - flutter_secure_storage (6.0.0):
+    - Flutter
   - location (0.0.1):
     - Flutter
+  - NMapsGeometry (1.0.2)
+  - NMapsMap (3.18.1):
+    - NMapsGeometry
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -26,6 +34,8 @@ PODS:
 DEPENDENCIES:
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - Flutter (from `Flutter`)
+  - flutter_naver_map (from `.symlinks/plugins/flutter_naver_map/ios`)
+  - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - location (from `.symlinks/plugins/location/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - TensorFlowLiteSwift/CoreML
@@ -33,6 +43,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - NMapsGeometry
+    - NMapsMap
     - TensorFlowLiteC
     - TensorFlowLiteSwift
 
@@ -41,6 +53,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/camera_avfoundation/ios"
   Flutter:
     :path: Flutter
+  flutter_naver_map:
+    :path: ".symlinks/plugins/flutter_naver_map/ios"
+  flutter_secure_storage:
+    :path: ".symlinks/plugins/flutter_secure_storage/ios"
   location:
     :path: ".symlinks/plugins/location/ios"
   path_provider_foundation:
@@ -51,7 +67,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   camera_avfoundation: dd002b0330f4981e1bbcb46ae9b62829237459a4
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_naver_map: 9b36cee8e83421f40782af8a4e7afbdf63ee5f92
+  flutter_secure_storage: d33dac7ae2ea08509be337e775f6b59f1ff45f12
   location: d5cf8598915965547c3f36761ae9cc4f4e87d22e
+  NMapsGeometry: 4e02554fa9880ef02ed96b075dc84355d6352479
+  NMapsMap: e879088eeee2d1e3b97f0a609076e1824dce2cad
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   TensorFlowLiteC: a836de9b6e6018665ccc349538bdd2c3b80dd7a5
   TensorFlowLiteSwift: f706b143b69d7bf433aba7b08049bdd11c321a10
