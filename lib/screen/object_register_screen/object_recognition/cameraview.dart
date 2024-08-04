@@ -124,21 +124,18 @@ class CameraViewState extends State<CameraView> with WidgetsBindingObserver {
     return results;
   }
 
-  @override
   // 앱이 일시 중지되거나 재개될 때 호출
-  void didChangeAppLifecycleState(AppLifecycleState state) async {
-    switch (state) {
-      // 앱이 일시 중지되면 카메라 컨트롤러의 이미지 스트림 중지
-      case AppLifecycleState.paused:
-        cameraController?.stopImageStream();
-        break;
-      // 앱이 재개되면 카메라 컨트롤러의 이미지 스트림을 다시 시작
-      case AppLifecycleState.resumed:
-        if (!cameraController!.value.isStreamingImages) {
-          await cameraController?.startImageStream(onLatestImageAvailable);
-        }
-        break;
-      default:
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.paused) {
+      // 앱이 일시 중지 상태로 들어가면 카메라 스트림 중지
+      cameraController?.stopImageStream();
+    } else if (state == AppLifecycleState.resumed) {
+      // 앱이 다시 활성화되면 카메라 스트림 재개
+      if (cameraController != null && mounted) {
+        cameraController?.startImageStream(onLatestImageAvailable);
+      }
     }
   }
 

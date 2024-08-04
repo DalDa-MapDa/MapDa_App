@@ -25,6 +25,9 @@ class _CameraHomeScreenState extends State<CameraHomeScreen> {
   /// Scaffold Key
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
+  //카메라 작동 중지를 위한 플래그
+  bool isRegistering = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,31 +42,12 @@ class _CameraHomeScreenState extends State<CameraHomeScreen> {
       ),
       body: Stack(
         children: [
-          RepaintBoundary(
-            key: _cameraViewKey,
-            child: CameraView(resultsCallback, updateElapsedTimeCallback),
-          ),
+          if (!isRegistering)
+            RepaintBoundary(
+              key: _cameraViewKey,
+              child: CameraView(resultsCallback, updateElapsedTimeCallback),
+            ),
           boundingBoxes(results),
-          // Align(
-          //   alignment: Alignment.bottomCenter,
-          //   child: SingleChildScrollView(
-          //     child: Column(
-          //       children: [
-          //         resultsList(results),
-          //         Padding(
-          //           padding: const EdgeInsets.all(10.0),
-          //           child: Column(
-          //             children: [
-          //               statsRow('이미지 추론 시간:', '$totalElapsedTime ms'),
-          //               statsRow('이미지 크기',
-          //                   '${CameraSettings.inputImageSize?.width} X ${CameraSettings.inputImageSize?.height}'),
-          //             ],
-          //           ),
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
@@ -79,6 +63,9 @@ class _CameraHomeScreenState extends State<CameraHomeScreen> {
 
   // 사물을 탭할 때의 함수
   void _thisObjectTap({required String thisObjectName}) async {
+    setState(() {
+      isRegistering = true; // 카메라 작동 중지
+    });
     ui.Image image = await captureCameraView(); // 스크린샷 캡처
     Navigator.push(
       context,
@@ -88,7 +75,11 @@ class _CameraHomeScreenState extends State<CameraHomeScreen> {
           image: image, // 스크린샷 이미지를 전달
         ),
       ),
-    );
+    ).then((_) {
+      setState(() {
+        isRegistering = false; // 카메라 작동 재개
+      });
+    });
   }
 
   /// Returns Stack of bounding boxes

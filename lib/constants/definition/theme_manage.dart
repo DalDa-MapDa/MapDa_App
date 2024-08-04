@@ -16,6 +16,9 @@ class ThemeManage {
         enabledBorder: InputBorder.none,
         focusedBorder: InputBorder.none,
       ),
+      textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: AppColors.p_7_base,
+      ),
     );
   }
 }
