@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mapda/constants/definition/constants.dart';
-import 'package:mapda/manage/screen_mange.dart';
+import 'package:mapda/constants/manage/screen_mange.dart';
 
 enum SwitchIndex {
   none,

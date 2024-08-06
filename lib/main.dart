@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:mapda/constants/definition/constants.dart';
-import 'package:mapda/manage/screen_mange.dart';
+import 'package:mapda/constants/manage/screen_mange.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

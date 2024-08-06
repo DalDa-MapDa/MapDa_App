@@ -4,6 +4,8 @@ import 'package:image/image.dart' as img;
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:mapda/constants/definition/constants.dart';
+import 'package:mapda/constants/manage/screen_mange.dart';
+import 'package:mapda/manage/api/object_api_manage.dart';
 
 class ObjectRegisterHome extends StatefulWidget {
   final String thisObjectName;
@@ -23,12 +25,33 @@ class _ObjectRegisterHomeState extends State<ObjectRegisterHome> {
   Location location = Location();
   Uint8List? convertedJpeg;
   final TextEditingController _textFieldController = TextEditingController();
+  LocationData? currentLocation;
 
   @override
   void initState() {
     super.initState();
     _retrieveLocation();
     _convertImage();
+    _textFieldController.addListener(_updateState); // 리스너 추가
+  }
+
+  @override
+  void dispose() {
+    _textFieldController.removeListener(_updateState); // 리스너 제거
+    _textFieldController.dispose();
+    super.dispose();
+  }
+
+  // 텍스트 필드 값 변경시 상태 업데이트를 위한 메소드
+  void _updateState() {
+    setState(() {}); // 필요한 경우 추가 상태 업데이트 로직 포함
+  }
+
+  // 업로드 가능 여부 확인
+  bool isReadyToUpload() {
+    return convertedJpeg != null &&
+        currentLocation != null &&
+        _textFieldController.text.isNotEmpty;
   }
 
   // ui.Image를 JPEG으로 변환
@@ -74,7 +97,6 @@ class _ObjectRegisterHomeState extends State<ObjectRegisterHome> {
   void _retrieveLocation() async {
     bool serviceEnabled;
     PermissionStatus permissionGranted;
-    LocationData locationData;
 
     serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled) {
@@ -83,6 +105,7 @@ class _ObjectRegisterHomeState extends State<ObjectRegisterHome> {
         return;
       }
     }
+
     permissionGranted = await location.hasPermission();
     if (permissionGranted == PermissionStatus.denied) {
       permissionGranted = await location.requestPermission();
@@ -90,12 +113,49 @@ class _ObjectRegisterHomeState extends State<ObjectRegisterHome> {
         return;
       }
     }
-    locationData = await location.getLocation();
+    currentLocation = await location.getLocation();
+    print(
+        '위도: ${currentLocation!.latitude}, 경도: ${currentLocation!.longitude}');
   }
 
   // TextField 내용을 지우는 함수
   void clearTextField() {
     _textFieldController.clear();
+  }
+
+  // 서버에 데이터 업로드
+  Future<void> uploadDangerObject() async {
+    if (!isReadyToUpload()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('이미지 변환을 기다리거나 위치 정보를 가져오세요.')));
+      return;
+    }
+
+    try {
+      await ObjectApiManage.postDangerObject(
+        userID: 123, // 예시 사용자 ID
+        latitude: currentLocation!.latitude!,
+        longitude: currentLocation!.longitude!,
+        objectName: widget.thisObjectName,
+        placeName: _textFieldController.text,
+        imageData: convertedJpeg!,
+      ).then((_) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const IntergrateScreen(
+                    switchIndex: SwitchIndex.toZero,
+                  )),
+          (Route<dynamic> route) => false, // 모든 이전 라우트 제거
+        );
+      });
+
+      // ScaffoldMessenger.of(context)
+      //     .showSnackBar(const SnackBar(content: Text('성공적으로 등록되었습니다.')));
+    } catch (e) {
+      // ScaffoldMessenger.of(context)
+      //     .showSnackBar(SnackBar(content: Text('등록에 실패했습니다: $e')));
+    }
   }
 
   @override
@@ -162,18 +222,25 @@ class _ObjectRegisterHomeState extends State<ObjectRegisterHome> {
         color: AppColors.s_w,
         child: Column(
           children: [
-            Container(
-              height: 48,
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              decoration: BoxDecoration(
-                color: AppColors.p_7_base,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: Center(
-                child: Text(
-                  '등록 완료',
-                  style: AppTextStyles.B_14.copyWith(color: AppColors.s_w),
+            InkWell(
+              borderRadius: BorderRadius.circular(24),
+              onTap: () {
+                isReadyToUpload() ? uploadDangerObject() : null;
+              },
+              child: Ink(
+                height: 48,
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                decoration: BoxDecoration(
+                  color: isReadyToUpload() ? AppColors.p_7_base : AppColors.g_2,
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Center(
+                  child: Text(
+                    '등록 완료',
+                    style: AppTextStyles.B_14.copyWith(color: AppColors.s_w),
+                  ),
                 ),
               ),
             ),

@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:mapda/constants/definition/constants.dart';
+import 'package:mapda/constants/manage/model_manage.dart';
+import 'package:mapda/manage/api/object_api_manage.dart';
 
 class MainHome extends StatefulWidget {
   const MainHome({super.key});
@@ -13,6 +15,31 @@ class MainHome extends StatefulWidget {
 class _MainHomeState extends State<MainHome> {
   final Completer<NaverMapController> mapControllerCompleter = Completer();
   int listItemCount = 20;
+  List<ObjectListModel> objectList = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchObjectList();
+  }
+
+  Future<void> fetchObjectList() async {
+    try {
+      List<ObjectListModel> objects =
+          await ObjectApiManage.getDangerObjectList();
+      setState(() {
+        objectList = objects;
+        isLoading = false;
+        print('성공: $objectList');
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print('리스트 호출 실패: $e');
+    }
+  }
 
   Widget _buildNaverMap() {
     // 네이버 지도 위젯 생성
@@ -91,7 +118,7 @@ class _MainHomeState extends State<MainHome> {
       snap: true,
       minChildSize: 0.1,
       maxChildSize: 0.85,
-      initialChildSize: 0.3,
+      initialChildSize: 0.1,
       builder: (BuildContext context, ScrollController scrollController) {
         return Container(
           height: MediaQuery.of(context).size.height * 0.9,
@@ -128,11 +155,15 @@ class _MainHomeState extends State<MainHome> {
                     ),
                     Gaps.v24,
                     ...List.generate(
-                      listItemCount,
+                      objectList.length,
                       (index) => Column(
                         children: [
-                          const HomeDangerList(),
-                          if (index != listItemCount) Gaps.v16,
+                          HomeDangerList(
+                            objectName: objectList[index].objectName,
+                            objectLocationName: objectList[index].placeName,
+                            imageUrl: objectList[index].imageUrl,
+                          ),
+                          if (index != objectList.length - 1) Gaps.v16,
                         ],
                       ),
                     ),
