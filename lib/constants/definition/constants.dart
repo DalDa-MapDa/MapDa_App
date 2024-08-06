@@ -13,3 +13,6 @@ export 'package:mapda/widget/bottom_navigation/gnb_tap.dart';
 
 //리스트 컴포넌트
 export 'package:mapda/widget/list_component/home_danger_list.dart'; //홈_위험 물체 리스트
+
+//스낵바
+export 'package:mapda/widget/snack_bar/custom_snackbar.dart'; //커스텀 스낵바

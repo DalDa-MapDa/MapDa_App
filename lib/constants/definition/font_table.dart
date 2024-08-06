@@ -85,6 +85,13 @@ class AppTextStyles {
     height: 18 / 12,
   );
 
+  static const TextStyle R_10 = TextStyle(
+    fontFamily: 'pretendard',
+    fontWeight: FontWeight.w400,
+    fontSize: 10,
+    height: 12 / 10,
+  );
+
   static const TextStyle button_B_14 = TextStyle(
       fontFamily: 'pretendard',
       fontWeight: FontWeight.w700,

@@ -17,3 +17,6 @@ export 'package:mapda/screen/home_screen/main_home.dart'; //홈 화면
 //Bottom Navigation Bar화면
 export 'package:mapda/screen/intergrate_screen.dart'; //GNB 통합화면
 
+//위험물체 상세화면
+export 'package:mapda/screen/specfic_object_screen/specfic_object_screen.dart'; //위험물체 상세화면
+

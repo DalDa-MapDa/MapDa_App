@@ -84,11 +84,9 @@ class _ObjectRegisterHomeState extends State<ObjectRegisterHome> {
       // 이미지 데이터를 JPEG로 인코딩
       Uint8List convertedJpeg =
           Uint8List.fromList(img.encodeJpg(convertedImage));
-      print('변환 이미지:$convertedJpeg');
 
       return convertedJpeg;
     } catch (e) {
-      print('Error converting ui.Image to JPEG: $e');
       return null;
     }
   }
@@ -114,8 +112,6 @@ class _ObjectRegisterHomeState extends State<ObjectRegisterHome> {
       }
     }
     currentLocation = await location.getLocation();
-    print(
-        '위도: ${currentLocation!.latitude}, 경도: ${currentLocation!.longitude}');
   }
 
   // TextField 내용을 지우는 함수
@@ -132,29 +128,50 @@ class _ObjectRegisterHomeState extends State<ObjectRegisterHome> {
     }
 
     try {
-      await ObjectApiManage.postDangerObject(
+      // 서버에 데이터를 업로드하고 응답에서 ID를 추출
+      final response = await ObjectApiManage.postDangerObject(
         userID: 123, // 예시 사용자 ID
         latitude: currentLocation!.latitude!,
         longitude: currentLocation!.longitude!,
         objectName: widget.thisObjectName,
         placeName: _textFieldController.text,
         imageData: convertedJpeg!,
-      ).then((_) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const IntergrateScreen(
-                    switchIndex: SwitchIndex.toZero,
-                  )),
-          (Route<dynamic> route) => false, // 모든 이전 라우트 제거
-        );
-      });
+      );
 
-      // ScaffoldMessenger.of(context)
-      //     .showSnackBar(const SnackBar(content: Text('성공적으로 등록되었습니다.')));
+      // 응답 데이터에서 새로운 객체의 ID를 추출
+      final int newObjectId = response['id'];
+
+      // 스낵바를 통해 사용자에게 등록 완료 메시지 표시
+      ScaffoldMessenger.of(context).showSnackBar(CustomSnackbar.create(
+        message: "위험물체로 등록 완료되었습니다",
+        actionLabel: "보러가기",
+        onAction: () {
+          // '보러가기' 클릭 시, SpecificObjectScreen으로 이동
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SpecificObjectScreen(
+                objectId: newObjectId, // 전달할 ID
+              ),
+            ),
+          );
+        },
+      ));
+
+      // 모든 이전 라우트를 제거하고 새로운 화면으로 이동
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const IntergrateScreen(
+                  switchIndex: SwitchIndex.toZero,
+                )),
+        (Route<dynamic> route) => false, // 모든 이전 라우트 제거
+      );
     } catch (e) {
-      // ScaffoldMessenger.of(context)
-      //     .showSnackBar(SnackBar(content: Text('등록에 실패했습니다: $e')));
+      // 예외 발생 시 에러 메시지 표시
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('등록에 실패했습니다: $e')),
+      );
     }
   }
 

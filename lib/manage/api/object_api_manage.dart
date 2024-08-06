@@ -22,8 +22,26 @@ class ObjectApiManage {
     }
   }
 
+  // 특정 위험 물체 정보를 가져오는 GET 메소드 (http 사용)
+  static Future<ObjectListModel> getSpecificObject({required int id}) async {
+    final response =
+        await http.get(Uri.parse('$baseUrl/get_specific_object/$id'));
+
+    if (response.statusCode == 200) {
+      // 응답 데이터를 UTF-8로 디코딩하여 처리
+      var decodedData = utf8.decode(response.bodyBytes);
+      var jsonData = jsonDecode(decodedData);
+
+      // ObjectListModel로 파싱
+      return ObjectListModel.fromJson(jsonData);
+    } else {
+      throw Exception(
+          'Failed to load object data. Status code: ${response.statusCode}');
+    }
+  }
+
   // 위험 물체 등록 POST 메소드
-  static Future<void> postDangerObject({
+  static Future<Map<String, dynamic>> postDangerObject({
     required int userID,
     required double latitude,
     required double longitude,
@@ -40,17 +58,20 @@ class ObjectApiManage {
         'placeName': placeName,
         'imageData': MultipartFile.fromBytes(
           imageData,
-          filename: 'upload.jpg', // 파일명 지정
-          contentType: MediaType('image', 'jpeg'), // 올바른 MediaType 객체 사용
+          filename: 'upload.jpg',
+          contentType: MediaType('image', 'jpeg'),
         ),
       });
 
       final response = await _dio.post('$baseUrl/register', data: formData);
 
       if (response.statusCode == 200) {
-        print('Upload successful');
+        print('Upload successful, response: ${response.data}');
+        return response.data; // 서버 응답 데이터 반환
       } else {
         print('Failed to upload. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to upload. Status code: ${response.statusCode}');
       }
     } catch (e) {
       print('Error occurred while uploading: $e');

@@ -31,13 +31,11 @@ class _MainHomeState extends State<MainHome> {
       setState(() {
         objectList = objects;
         isLoading = false;
-        print('성공: $objectList');
       });
     } catch (e) {
       setState(() {
         isLoading = false;
       });
-      print('리스트 호출 실패: $e');
     }
   }
 
@@ -162,6 +160,7 @@ class _MainHomeState extends State<MainHome> {
                             objectName: objectList[index].objectName,
                             objectLocationName: objectList[index].placeName,
                             imageUrl: objectList[index].imageUrl,
+                            objectId: objectList[index].objectId,
                           ),
                           if (index != objectList.length - 1) Gaps.v16,
                         ],
