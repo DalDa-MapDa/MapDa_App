@@ -12,34 +12,41 @@ enum SwitchIndex {
 
 class IntergrateScreen extends StatefulWidget {
   final SwitchIndex switchIndex;
+  final int? newObjectId;
 
   const IntergrateScreen({
     super.key,
     this.switchIndex = SwitchIndex.none,
+    this.newObjectId,
   });
 
   // 외부에서 접근 가능한 함수를 정의_교외지원사업 탭
   static void setSelectedIndexToZero(BuildContext context) {
-    final state = context.findAncestorStateOfType<_IntergrateScreenState>();
+    final state = context.findAncestorStateOfType<IntergrateScreenState>();
     state?.setSelectedIndexToZero();
   }
 
   // 외부에서 접근 가능한 함수를 정의_교내지원사업 탭
   static void setSelectedIndexToOne(BuildContext context) {
-    final state = context.findAncestorStateOfType<_IntergrateScreenState>();
+    final state = context.findAncestorStateOfType<IntergrateScreenState>();
     state?.setSelectedIndexToOne();
   }
 
   @override
-  State<IntergrateScreen> createState() => _IntergrateScreenState();
+  State<IntergrateScreen> createState() => IntergrateScreenState();
 }
 
-class _IntergrateScreenState extends State<IntergrateScreen> {
+class IntergrateScreenState extends State<IntergrateScreen> {
   int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    if (widget.newObjectId != null) {
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => showCompletionSnackbar(widget.newObjectId!),
+      );
+    }
 
     switch (widget.switchIndex) {
       case SwitchIndex.none:
@@ -58,6 +65,24 @@ class _IntergrateScreenState extends State<IntergrateScreen> {
         _selectedIndex = 3;
         break;
     }
+  }
+
+  // 스낵바를 동적으로 표시하는 메서드
+  void showCompletionSnackbar(int objectId) {
+    ScaffoldMessenger.of(context).showSnackBar(CustomSnackbar.create(
+      message: "위험물체로 등록 완료되었습니다",
+      actionLabel: "보러가기",
+      onAction: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SpecificObjectScreen(
+              objectId: objectId,
+            ),
+          ),
+        );
+      },
+    ));
   }
 
   void _onTap(int index) {

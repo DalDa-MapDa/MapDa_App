@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:mapda/constants/definition/constants.dart';
 import 'package:mapda/constants/manage/model_manage.dart';
+import 'package:mapda/constants/manage/screen_mange.dart';
 import 'package:mapda/manage/api/object_api_manage.dart';
 
 class MainHome extends StatefulWidget {
@@ -50,6 +51,8 @@ class _MainHomeState extends State<MainHome> {
         logoMargin: EdgeInsets.only(bottom: 30, left: 24),
         logoAlign: NLogoAlign.leftBottom,
         logoClickEnable: false,
+        initialCameraPosition: NCameraPosition(
+            target: NLatLng(37.5802, 126.923), zoom: 14), //카메라 초기 위치 설정
       ),
       onMapReady: (naverMapController) async {
         // 지도 준비 완료 시 호출되는 콜백 함수
@@ -78,24 +81,37 @@ class _MainHomeState extends State<MainHome> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            width: 184,
-            height: 48,
-            decoration: BoxDecoration(
-              color: AppColors.p_7_base,
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
               borderRadius: BorderRadius.circular(24),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AppIcon.plus_16,
-                Gaps.h8,
-                Text(
-                  '이동 정보 등록하기',
-                  style:
-                      AppTextStyles.button_B_14.copyWith(color: AppColors.s_w),
-                )
-              ],
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MovementReg1PlaceName()),
+                );
+              },
+              child: Ink(
+                width: 184,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: AppColors.p_7_base,
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppIcon.plus_16,
+                    Gaps.h8,
+                    Text(
+                      '이동 정보 등록하기',
+                      style: AppTextStyles.button_B_14
+                          .copyWith(color: AppColors.s_w),
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
         ],
@@ -163,6 +179,7 @@ class _MainHomeState extends State<MainHome> {
                             objectId: objectList[index].objectId,
                           ),
                           if (index != objectList.length - 1) Gaps.v16,
+                          if (index == objectList.length - 1) Gaps.v24,
                         ],
                       ),
                     ),
@@ -205,6 +222,7 @@ class _MainHomeState extends State<MainHome> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
+      behavior: HitTestBehavior.translucent,
       child: Scaffold(
         body: Stack(
           // Stack 위젯으로 레이어 분리

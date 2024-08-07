@@ -20,3 +20,6 @@ export 'package:mapda/screen/intergrate_screen.dart'; //GNB 통합화면
 //위험물체 상세화면
 export 'package:mapda/screen/specfic_object_screen/specfic_object_screen.dart'; //위험물체 상세화면
 
+//이동장소 등록화면
+export 'package:mapda/screen/movement_register_screen/mv_reg_1.dart'; //이동장소 등록화면1
+

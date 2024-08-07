@@ -4,9 +4,11 @@ import 'package:mapda/constants/definition/constants.dart';
 class ThemeManage {
   static ThemeData get theme {
     return ThemeData(
+      canvasColor: Colors.white,
       useMaterial3: true,
       scaffoldBackgroundColor: AppColors.s_w,
       bottomAppBarTheme: const BottomAppBarTheme(
+        color: AppColors.s_w,
         padding: EdgeInsets.zero,
         height: 70,
         elevation: 1,
@@ -18,6 +20,15 @@ class ThemeManage {
       ),
       textSelectionTheme: const TextSelectionThemeData(
         cursorColor: AppColors.p_7_base,
+      ),
+      appBarTheme: const AppBarTheme(
+        color: AppColors.s_w,
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: AppColors.s_w,
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: AppColors.s_w,
       ),
     );
   }

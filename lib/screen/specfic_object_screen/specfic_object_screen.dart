@@ -47,8 +47,8 @@ class _SpecificObjectScreenState extends State<SpecificObjectScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Specific Object'),
+      appBar: const BackAppBar(
+        thisBgColor: AppColors.s_w,
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -95,10 +95,15 @@ class _SpecificObjectScreenState extends State<SpecificObjectScreen> {
                           Positioned(
                             bottom: 24,
                             right: 24,
-                            child: Text(
-                              '등록 | ${specificObject!.createdAt}',
-                              style: AppTextStyles.R_10
-                                  .copyWith(color: AppColors.s_w),
+                            child: SizedBox(
+                              height: 20,
+                              child: Center(
+                                child: Text(
+                                  '등록 | ${DateFormatter.formatDateTime(specificObject!.createdAt)}',
+                                  style: AppTextStyles.R_10
+                                      .copyWith(color: AppColors.s_w),
+                                ),
+                              ),
                             ),
                           ),
                         ],

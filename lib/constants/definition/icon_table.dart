@@ -42,6 +42,11 @@ class AppIcon {
       SvgPicture.asset('assets/icon/24/pin_red_24.svg', fit: BoxFit.scaleDown);
   static Widget get pin_blue_24 =>
       SvgPicture.asset('assets/icon/24/pin_blue_24.svg', fit: BoxFit.scaleDown);
+  static Widget get x_circle_24 =>
+      SvgPicture.asset('assets/icon/24/x_circle_24.svg', fit: BoxFit.scaleDown);
+  static Widget get arrow_left_24 =>
+      SvgPicture.asset('assets/icon/24/arrow_left_24.svg',
+          fit: BoxFit.scaleDown);
   static Widget get x_24 =>
       SvgPicture.asset('assets/icon/24/x_24.svg', fit: BoxFit.scaleDown);
 
