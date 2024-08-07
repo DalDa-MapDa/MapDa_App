@@ -15,21 +15,24 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(24),
-      onTap: (isReady ?? false) ? thisTap : null, // 조건에 맞게 onTap 설정
-      child: Ink(
-        height: 48,
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        decoration: BoxDecoration(
-          color: _getColor(),
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: Center(
-          child: Text(
-            thisText,
-            style: AppTextStyles.B_14.copyWith(color: AppColors.s_w),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(24),
+        onTap: (isReady ?? false) ? thisTap : null, // 조건에 맞게 onTap 설정
+        child: Ink(
+          height: 48,
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          decoration: BoxDecoration(
+            color: _getColor(),
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Center(
+            child: Text(
+              thisText,
+              style: AppTextStyles.B_14.copyWith(color: AppColors.s_w),
+            ),
           ),
         ),
       ),

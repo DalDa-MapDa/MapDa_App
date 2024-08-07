@@ -27,6 +27,7 @@ class _MyWidgetState extends State<CustomTextfield> {
         borderRadius: BorderRadius.circular(10),
       ),
       height: 48,
+      width: double.infinity,
       child: Row(
         children: [
           Expanded(
