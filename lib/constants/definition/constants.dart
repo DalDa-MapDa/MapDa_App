@@ -24,3 +24,6 @@ export 'package:mapda/widget/list_component/reg_image_list.dart'; //등록 이�
 
 //스낵바
 export 'package:mapda/widget/snack_bar/custom_snackbar.dart'; //커스텀 스낵바
+
+//시간표
+export 'package:mapda/widget/timetable/timetable_widget.dart'; //시간표 위젯

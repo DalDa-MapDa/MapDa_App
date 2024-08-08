@@ -109,7 +109,10 @@ class _MovementReg4RestRoomState extends State<MovementReg4RestRoom> {
             child: Column(
               children: [
                 InkWell(
-                  onTap: widget.onNavigateForward,
+                  onTap: () {
+                    switchAccesible(0);
+                    widget.onNavigateForward();
+                  },
                   child: Ink(
                       height: 36,
                       width: 68,

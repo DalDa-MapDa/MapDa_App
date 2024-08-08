@@ -30,3 +30,9 @@ export 'package:mapda/screen/movement_register_screen/mv_reg_5.dart'; //이동�
 export 'package:mapda/screen/movement_register_screen/mv_reg_6.dart'; //이동장소 등록화면6
 export 'package:mapda/screen/movement_register_screen/mv_reg_7.dart'; //이동장소 등록화면7
 
+//캠퍼스 화면
+export 'package:mapda/screen/campus_screen/main_campus.dart'; //캠퍼스 화면
+
+//마이페이지
+export 'package:mapda/screen/mypage_screen/main_mypage.dart'; //마이페이지 메인 화면
+

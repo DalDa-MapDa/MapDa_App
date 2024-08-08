@@ -10,27 +10,23 @@ class MovementRegIntergrate extends StatefulWidget {
 }
 
 class _MovementRegIntergrateState extends State<MovementRegIntergrate> {
-  final PageController _pageController = PageController(
-    initialPage: 0,
-  ); // 페이지 컨트롤러 생성
+  int _currentIndex = 0; // 현재 인덱스
 
+  // 화면 전환 함수
   void switchScreen(int index) {
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 200),
-      curve: Curves.easeInOut,
-    );
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
   // 뒤로가기 버튼
   void navigateBackward() {
-    if (_pageController.page == 0) {
+    if (_currentIndex == 0) {
       Navigator.pop(context);
     } else {
-      _pageController.previousPage(
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeInOut,
-      );
+      setState(() {
+        _currentIndex--;
+      });
     }
   }
 
@@ -64,17 +60,10 @@ class _MovementRegIntergrateState extends State<MovementRegIntergrate> {
         appBar: regAppBar(),
         body: Column(
           children: [
-            MovementRegState(
-                thisState: _pageController.hasClients
-                    ? _pageController.page!.round() + 1
-                    : 1),
+            MovementRegState(thisState: _currentIndex + 1),
             Expanded(
-              child: PageView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: _pageController,
-                onPageChanged: (int index) {
-                  setState(() {});
-                },
+              child: IndexedStack(
+                index: _currentIndex,
                 children: <Widget>[
                   MovementReg1PlaceName(
                       onNavigateForward: () => switchScreen(1)),

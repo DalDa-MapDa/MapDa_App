@@ -101,7 +101,7 @@ class _MainHomeState extends State<MainHome> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    AppIcon.plus_16,
+                    AppIcon.plus_white_16,
                     Gaps.h8,
                     Text(
                       '이동 정보 등록하기',

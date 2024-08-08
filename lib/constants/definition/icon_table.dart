@@ -61,12 +61,28 @@ class AppIcon {
   static Widget get x_redcircle_24 =>
       SvgPicture.asset('assets/icon/24/x_redcircle_24.svg',
           fit: BoxFit.scaleDown);
+  static Widget get marker_blue_24 => SvgPicture.asset(
+        'assets/icon/24/marker_blue_24.svg',
+      );
+  static Widget get marker_red_24 => SvgPicture.asset(
+        'assets/icon/24/marker_red_24.svg',
+      );
 
   // 16 Size Icon
-  static Widget get plus_16 =>
-      SvgPicture.asset('assets/icon/16/plus_16.svg', fit: BoxFit.scaleDown);
+  static Widget get plus_white_16 =>
+      SvgPicture.asset('assets/icon/16/plus_white_16.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get plus_dark_16 =>
+      SvgPicture.asset('assets/icon/16/plus_dark_16.svg',
+          fit: BoxFit.scaleDown);
 
   // 40 Size Icon
   static Widget get gps_40 =>
       SvgPicture.asset('assets/icon/40/gps_40.svg', fit: BoxFit.scaleDown);
+
+  //PNG Icon
+  static Widget get pin_red =>
+      Image.asset('assets/icon/png/pin_red.png', fit: BoxFit.scaleDown);
+  static Widget get pin_blue =>
+      Image.asset('assets/icon/png/pin_blue.png', fit: BoxFit.scaleDown);
 }

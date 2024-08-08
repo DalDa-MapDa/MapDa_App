@@ -110,11 +110,11 @@ class IntergrateScreenState extends State<IntergrateScreen> {
       case 1:
         return const CameraHomeScreen();
       case 2:
-        return const CameraHomeScreen();
+        return const MainCampus();
       case 3:
-        return const CameraHomeScreen();
+        return const MainMypage();
       default:
-        return const CameraHomeScreen();
+        return const MainHome();
     }
   }
 

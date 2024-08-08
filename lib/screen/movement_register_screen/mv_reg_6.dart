@@ -86,7 +86,10 @@ class _MovementReg6RampState extends State<MovementReg6Ramp> {
             child: Column(
               children: [
                 InkWell(
-                  onTap: widget.onNavigateForward,
+                  onTap: () {
+                    switchAccesible(0);
+                    widget.onNavigateForward();
+                  },
                   child: Ink(
                       height: 36,
                       width: 68,
