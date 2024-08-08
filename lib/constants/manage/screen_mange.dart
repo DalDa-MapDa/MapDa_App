@@ -25,4 +25,8 @@ export 'package:mapda/screen/movement_register_screen/mv_reg_intergrate.dart'; /
 export 'package:mapda/screen/movement_register_screen/mv_reg_1.dart'; //이동장소 등록화면1
 export 'package:mapda/screen/movement_register_screen/mv_reg_2.dart'; //이동장소 등록화면2
 export 'package:mapda/screen/movement_register_screen/mv_reg_3.dart'; //이동장소 등록화면3
+export 'package:mapda/screen/movement_register_screen/mv_reg_4.dart'; //이동장소 등록화면4
+export 'package:mapda/screen/movement_register_screen/mv_reg_5.dart'; //이동장소 등록화면5
+export 'package:mapda/screen/movement_register_screen/mv_reg_6.dart'; //이동장소 등록화면6
+export 'package:mapda/screen/movement_register_screen/mv_reg_7.dart'; //이동장소 등록화면7
 

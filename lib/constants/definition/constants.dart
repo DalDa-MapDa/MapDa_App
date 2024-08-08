@@ -15,9 +15,12 @@ export 'package:mapda/widget/topapp_bar/custom_appbar.dart'; //커스텀 앱바
 export 'package:mapda/widget/register_step/reg_step.dart'; //등록 단계
 export 'package:mapda/widget/textfield/custom_textfield.dart'; //커스텀 텍스트필드
 export 'package:mapda/widget/button/next_button.dart'; //다음 버튼
+export 'package:mapda/widget/button/accesible_button.dart'; //접근성 버튼
+export 'package:mapda/widget/button/chips_button.dart'; //칩 버튼
 
 //리스트 컴포넌트
 export 'package:mapda/widget/list_component/home_danger_list.dart'; //홈_위험 물체 리스트
+export 'package:mapda/widget/list_component/reg_image_list.dart'; //등록 이미지 리스트
 
 //스낵바
 export 'package:mapda/widget/snack_bar/custom_snackbar.dart'; //커스텀 스낵바

@@ -10,7 +10,7 @@ class MovementRegState extends StatelessWidget {
     return Row(
       mainAxisAlignment:
           MainAxisAlignment.spaceBetween, // Distribute space evenly
-      children: List.generate(7, (index) {
+      children: List.generate(8, (index) {
         return Expanded(
           child: Container(
             height: 4.0, // Set the height to 4

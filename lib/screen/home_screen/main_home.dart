@@ -42,8 +42,8 @@ class _MainHomeState extends State<MainHome> {
 
   Widget _buildNaverMap() {
     // 네이버 지도 위젯 생성
-    return NaverMap(
-      options: const NaverMapViewOptions(
+    return const NaverMap(
+      options: NaverMapViewOptions(
         liteModeEnable: true,
         indoorEnable: true, // 실내 맵 사용 가능 여부 설정
         locationButtonEnable: false, // 위치 버튼 표시 여부 설정
@@ -58,11 +58,6 @@ class _MainHomeState extends State<MainHome> {
         //   northEast: NLatLng(37.581663, 126.924718), // 지도 영역 설정
         // ),
       ),
-      onMapReady: (naverMapController) async {
-        // 지도 준비 완료 시 호출되는 콜백 함수
-        mapControllerCompleter
-            .complete(naverMapController); // Completer에 지도 컨트롤러 완료 신호 전송
-      },
     );
   }
 

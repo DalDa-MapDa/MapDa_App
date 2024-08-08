@@ -8,6 +8,12 @@ class AppIcon {
   static Widget get splash_logo =>
       SvgPicture.asset('assets/icon/other/splash_logo.svg',
           fit: BoxFit.scaleDown);
+  static Widget get restroom =>
+      SvgPicture.asset('assets/icon/other/restroom.svg', fit: BoxFit.scaleDown);
+  static Widget get elevator =>
+      SvgPicture.asset('assets/icon/other/elevator.svg', fit: BoxFit.scaleDown);
+  static Widget get ramp =>
+      SvgPicture.asset('assets/icon/other/ramp.svg', fit: BoxFit.scaleDown);
 
   // bottom navigation bar icons
   static Widget get gnb_camera_24_actived =>
@@ -49,6 +55,12 @@ class AppIcon {
           fit: BoxFit.scaleDown);
   static Widget get x_24 =>
       SvgPicture.asset('assets/icon/24/x_24.svg', fit: BoxFit.scaleDown);
+  static Widget get image_add_24 =>
+      SvgPicture.asset('assets/icon/24/image_add_24.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get x_redcircle_24 =>
+      SvgPicture.asset('assets/icon/24/x_redcircle_24.svg',
+          fit: BoxFit.scaleDown);
 
   // 16 Size Icon
   static Widget get plus_16 =>

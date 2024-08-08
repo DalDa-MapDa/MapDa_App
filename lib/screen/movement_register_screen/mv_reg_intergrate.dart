@@ -10,7 +10,9 @@ class MovementRegIntergrate extends StatefulWidget {
 }
 
 class _MovementRegIntergrateState extends State<MovementRegIntergrate> {
-  final PageController _pageController = PageController(); // 페이지 컨트롤러 생성
+  final PageController _pageController = PageController(
+    initialPage: 0,
+  ); // 페이지 컨트롤러 생성
 
   void switchScreen(int index) {
     _pageController.animateToPage(
@@ -78,7 +80,14 @@ class _MovementRegIntergrateState extends State<MovementRegIntergrate> {
                       onNavigateForward: () => switchScreen(1)),
                   MovementReg2Location(
                       onNavigateForward: () => switchScreen(2)),
-                  const MovementReg3Wheelchair()
+                  MovementReg3Wheelchair(
+                      onNavigateForward: () => switchScreen(3)),
+                  MovementReg4RestRoom(
+                      onNavigateForward: () => switchScreen(4)),
+                  MovementReg5Elevator(
+                      onNavigateForward: () => switchScreen(5)),
+                  MovementReg6Ramp(onNavigateForward: () => switchScreen(6)),
+                  const MovementReg7Image(),
                 ],
               ),
             ),

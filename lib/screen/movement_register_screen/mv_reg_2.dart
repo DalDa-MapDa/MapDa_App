@@ -32,10 +32,10 @@ class _MovementReg2LocationState extends State<MovementReg2Location> {
         logoClickEnable: false,
         initialCameraPosition: NCameraPosition(
             target: NLatLng(37.5802, 126.923), zoom: 17), //카메라 초기 위치 설정
-        // extent: NLatLngBounds(
-        //   southWest: NLatLng(37.578595, 126.921763),
-        //   northEast: NLatLng(37.581663, 126.920718), // 지도 영역 설정
-        // ),
+        extent: NLatLngBounds(
+          southWest: NLatLng(37.578595, 126.921763),
+          northEast: NLatLng(37.581663, 126.920718), // 지도 영역 설정
+        ),
       ),
       onMapReady: (naverMapController) async {
         // 지도 준비 완료 시 호출되는 콜백 함수
