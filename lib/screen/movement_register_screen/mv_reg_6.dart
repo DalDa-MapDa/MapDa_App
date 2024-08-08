@@ -15,17 +15,10 @@ class MovementReg6Ramp extends StatefulWidget {
 
 class _MovementReg6RampState extends State<MovementReg6Ramp> {
   int selectedIndex = 0;
-  int selectedFloorIndex = 0;
 
   void switchAccesible(int index) {
     setState(() {
       selectedIndex = index;
-    });
-  }
-
-  void switchFloor(int index) {
-    setState(() {
-      selectedFloorIndex = index;
     });
   }
 

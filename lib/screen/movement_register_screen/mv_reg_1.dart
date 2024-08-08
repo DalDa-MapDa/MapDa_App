@@ -3,10 +3,12 @@ import 'package:mapda/constants/definition/constants.dart';
 
 class MovementReg1PlaceName extends StatefulWidget {
   final VoidCallback onNavigateForward;
+  final Function(String) onPlaceName;
 
   const MovementReg1PlaceName({
     super.key,
     required this.onNavigateForward,
+    required this.onPlaceName,
   });
 
   @override
@@ -50,7 +52,10 @@ class _MovementReg1PlaceNameState extends State<MovementReg1PlaceName> {
           child: NextButton(
             thisText: '다음으로',
             isReady: textFieldController.text.isNotEmpty,
-            thisTap: widget.onNavigateForward,
+            thisTap: () {
+              widget.onPlaceName(textFieldController.text);
+              widget.onNavigateForward();
+            },
           ),
         ),
       ],

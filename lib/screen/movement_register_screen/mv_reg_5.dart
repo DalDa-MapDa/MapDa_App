@@ -15,17 +15,10 @@ class MovementReg5Elevator extends StatefulWidget {
 
 class _MovementReg5ElevatorState extends State<MovementReg5Elevator> {
   int selectedIndex = 0;
-  int selectedFloorIndex = 0;
 
   void switchAccesible(int index) {
     setState(() {
       selectedIndex = index;
-    });
-  }
-
-  void switchFloor(int index) {
-    setState(() {
-      selectedFloorIndex = index;
     });
   }
 

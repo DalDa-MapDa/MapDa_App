@@ -78,4 +78,73 @@ class ObjectApiManage {
       throw Exception('Failed to upload object');
     }
   }
+
+  // 이동 데이터 등록 POST 메소드
+  static Future<Map<String, dynamic>> postMovingData({
+    required int userID,
+    required String placeName,
+    required Map<String, double> selectedLocation,
+    required int wheeleChaitAccessible,
+    required int restRoomExist,
+    required int restRoomFloor,
+    required int elevatorAccessible,
+    required int rampAccessible,
+    List<Uint8List>? inDoorImages,
+    List<Uint8List>? outDoorImages,
+  }) async {
+    try {
+      // FormData 생성
+      FormData formData = FormData.fromMap({
+        'userID': userID,
+        'placeName': placeName,
+        'selectedLocation': jsonEncode(selectedLocation),
+        'wheeleChaitAccessible': wheeleChaitAccessible,
+        'restRoomExist': restRoomExist,
+        'restRoomFloor': restRoomFloor,
+        'elevatorAccessible': elevatorAccessible,
+        'rampAccessible': rampAccessible,
+      });
+
+      if (inDoorImages != null) {
+        for (var i = 0; i < inDoorImages.length; i++) {
+          formData.files.add(MapEntry(
+            'inDoorImage',
+            MultipartFile.fromBytes(
+              inDoorImages[i],
+              filename: 'in_door_image_$i.jpg',
+              contentType: MediaType('image', 'jpeg'),
+            ),
+          ));
+        }
+      }
+
+      if (outDoorImages != null) {
+        for (var i = 0; i < outDoorImages.length; i++) {
+          formData.files.add(MapEntry(
+            'outDoorImage',
+            MultipartFile.fromBytes(
+              outDoorImages[i],
+              filename: 'out_door_image_$i.jpg',
+              contentType: MediaType('image', 'jpeg'),
+            ),
+          ));
+        }
+      }
+
+      final response =
+          await _dio.post('$baseUrl/register_moving_data', data: formData);
+
+      if (response.statusCode == 200) {
+        print('Upload successful, response: ${response.data}');
+        return response.data; // 서버 응답 데이터 반환
+      } else {
+        print('Failed to upload. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to upload. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error occurred while uploading: $e');
+      throw Exception('Failed to upload moving data');
+    }
+  }
 }
