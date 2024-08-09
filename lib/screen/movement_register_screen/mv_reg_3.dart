@@ -3,10 +3,12 @@ import 'package:mapda/constants/definition/constants.dart';
 
 class MovementReg3Wheelchair extends StatefulWidget {
   final VoidCallback onNavigateForward;
+  final Function(int) wheelChairAccessible;
 
   const MovementReg3Wheelchair({
     super.key,
     required this.onNavigateForward,
+    required this.wheelChairAccessible,
   });
 
   @override
@@ -66,7 +68,10 @@ class _MovementReg3WheelchairState extends State<MovementReg3Wheelchair> {
             child: NextButton(
               thisText: '다음으로',
               isReady: selectedIndex != 0,
-              thisTap: widget.onNavigateForward,
+              thisTap: () {
+                widget.onNavigateForward();
+                widget.wheelChairAccessible(selectedIndex);
+              },
             ),
           )
         ],

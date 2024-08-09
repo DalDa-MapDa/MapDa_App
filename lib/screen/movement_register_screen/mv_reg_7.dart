@@ -3,7 +3,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mapda/constants/definition/constants.dart';
 
 class MovementReg7Image extends StatefulWidget {
-  const MovementReg7Image({super.key});
+  final Function(Map<String, dynamic>) saveImages;
+
+  const MovementReg7Image({
+    super.key,
+    required this.saveImages,
+  });
 
   @override
   State<MovementReg7Image> createState() => _MovementReg7ImageState();
@@ -108,7 +113,12 @@ class _MovementReg7ImageState extends State<MovementReg7Image> {
           child: Column(
             children: [
               InkWell(
-                onTap: null,
+                onTap: () {
+                  widget.saveImages({
+                    'inDoorImage': null,
+                    'outDoorImage': null,
+                  });
+                },
                 child: Ink(
                     height: 36,
                     width: 68,
@@ -123,7 +133,12 @@ class _MovementReg7ImageState extends State<MovementReg7Image> {
               NextButton(
                 thisText: '다음으로',
                 isReady: inDoorImage!.isNotEmpty || outDoorImage!.isNotEmpty,
-                thisTap: null,
+                thisTap: () {
+                  widget.saveImages({
+                    'inDoorImage': inDoorImage,
+                    'outDoorImage': outDoorImage,
+                  });
+                },
               ),
             ],
           ),

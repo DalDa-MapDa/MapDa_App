@@ -3,10 +3,12 @@ import 'package:mapda/constants/definition/constants.dart';
 
 class MovementReg6Ramp extends StatefulWidget {
   final VoidCallback onNavigateForward;
+  final Function(int) rampAccessible;
 
   const MovementReg6Ramp({
     super.key,
     required this.onNavigateForward,
+    required this.rampAccessible,
   });
 
   @override
@@ -98,7 +100,10 @@ class _MovementReg6RampState extends State<MovementReg6Ramp> {
                 NextButton(
                   thisText: '다음으로',
                   isReady: selectedIndex != 0,
-                  thisTap: widget.onNavigateForward,
+                  thisTap: () {
+                    widget.onNavigateForward();
+                    widget.rampAccessible(selectedIndex);
+                  },
                 ),
               ],
             ),

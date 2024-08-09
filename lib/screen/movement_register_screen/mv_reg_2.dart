@@ -5,10 +5,12 @@ import 'package:mapda/constants/definition/constants.dart';
 
 class MovementReg2Location extends StatefulWidget {
   final VoidCallback onNavigateForward;
+  final Function(Map<String, double>) locationData;
 
   const MovementReg2Location({
     super.key,
     required this.onNavigateForward,
+    required this.locationData,
   });
 
   @override
@@ -129,7 +131,10 @@ class _MovementReg2LocationState extends State<MovementReg2Location> {
                 NextButton(
                   thisText: '다음으로',
                   isReady: tappedLocation.isNotEmpty,
-                  thisTap: widget.onNavigateForward,
+                  thisTap: () {
+                    widget.onNavigateForward();
+                    widget.locationData(tappedLocation);
+                  },
                 ),
               ],
             ),

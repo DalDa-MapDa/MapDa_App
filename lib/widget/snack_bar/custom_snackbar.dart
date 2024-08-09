@@ -25,16 +25,17 @@ class CustomSnackbar {
               message,
               style: AppTextStyles.R_14.copyWith(color: AppColors.g_2),
             ),
-            SizedBox(
-              height: 36,
-              child: TextButton(
-                  clipBehavior: Clip.none,
-                  onPressed: onAction,
-                  child: Text(
-                    actionLabel,
-                    style: AppTextStyles.B_14.copyWith(color: AppColors.p_6),
-                  )),
-            )
+            if (actionLabel.isNotEmpty)
+              SizedBox(
+                height: 36,
+                child: TextButton(
+                    clipBehavior: Clip.none,
+                    onPressed: onAction,
+                    child: Text(
+                      actionLabel,
+                      style: AppTextStyles.B_14.copyWith(color: AppColors.p_6),
+                    )),
+              )
           ],
         ));
   }

@@ -1,7 +1,9 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mapda/constants/definition/constants.dart';
 import 'package:mapda/constants/manage/screen_mange.dart';
+import 'package:mapda/manage/api/object_api_manage.dart';
 
 class MovementRegIntergrate extends StatefulWidget {
   const MovementRegIntergrate({super.key});
@@ -42,11 +44,93 @@ class _MovementRegIntergrateState extends State<MovementRegIntergrate> {
     }
   }
 
+  // 장소명 저장 함수
   void savePlaceName(String name) {
     setState(() {
       placeName = name;
     });
-    print('장소명: $placeName');
+  }
+
+  // 위치 저장 함수
+  void saveLocation(Map<String, double> location) {
+    setState(() {
+      selectedLocation = location;
+    });
+  }
+
+  // 휠체어 접근성 저장 함수
+  void saveWheelchair(int value) {
+    setState(() {
+      wheeleChaitAccessible = value;
+    });
+  }
+
+//장애인 화장실 저장 함수
+  void saveRestRoom(Map<String, int> restRoomData) {
+    setState(() {
+      restRoomExist = restRoomData['restRoomExist'] ?? 0;
+      restRoomFloor = restRoomData['restRoomFloor'] ?? 0;
+    });
+  }
+
+  // 엘리베이터 저장 함수
+  void saveElevator(int value) {
+    setState(() {
+      elevatorAccessible = value;
+    });
+  }
+
+  // 경사로 저장 함수
+  void saveRamp(int value) {
+    setState(() {
+      rampAccessible = value;
+    });
+  }
+
+  // 이미지 저장 함수
+  void saveImage(Map<String, dynamic> images) {
+    setState(() {
+      inDoorImage = images['inDoorImage'] ?? [];
+      outDoorImage = images['outDoorImage'] ?? [];
+    });
+    uploadMovingObject();
+  }
+
+  //이미지 데이터 저장 및 모든 데이터 취합 함수
+  void uploadMovingObject() async {
+    try {
+      // 이미지 데이터를 Uint8List로 변환
+      List<Uint8List> inDoorImageBytes =
+          await Future.wait(inDoorImage.map((image) => image.readAsBytes()));
+      List<Uint8List> outDoorImageBytes =
+          await Future.wait(outDoorImage.map((image) => image.readAsBytes()));
+
+      // ObjectApiManage의 postMovingData 호출
+      final response = await ObjectApiManage.postMovingData(
+        userID: 1, // 실제 사용자 ID로 변경
+        placeName: placeName,
+        selectedLocation: selectedLocation,
+        wheeleChaitAccessible: wheeleChaitAccessible,
+        restRoomExist: restRoomExist,
+        restRoomFloor: restRoomFloor,
+        elevatorAccessible: elevatorAccessible,
+        rampAccessible: rampAccessible,
+        inDoorImages: inDoorImageBytes,
+        outDoorImages: outDoorImageBytes,
+      );
+
+      print('업로드 성공: $response');
+      if (mounted) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(CustomSnackbar.create(
+          message: "위험물체로 등록 완료되었습니다",
+          actionLabel: "보러가기",
+          onAction: () {},
+        ));
+      }
+    } catch (e) {
+      print('업로드 실패: $e');
+    }
   }
 
   // 상단 앱바
@@ -89,15 +173,28 @@ class _MovementRegIntergrateState extends State<MovementRegIntergrate> {
                     onPlaceName: savePlaceName,
                   ),
                   MovementReg2Location(
-                      onNavigateForward: () => switchScreen(2)),
+                    onNavigateForward: () => switchScreen(2),
+                    locationData: saveLocation,
+                  ),
                   MovementReg3Wheelchair(
-                      onNavigateForward: () => switchScreen(3)),
+                    onNavigateForward: () => switchScreen(3),
+                    wheelChairAccessible: saveWheelchair,
+                  ),
                   MovementReg4RestRoom(
-                      onNavigateForward: () => switchScreen(4)),
+                    onNavigateForward: () => switchScreen(4),
+                    restRoomExistAndFloor: saveRestRoom,
+                  ),
                   MovementReg5Elevator(
-                      onNavigateForward: () => switchScreen(5)),
-                  MovementReg6Ramp(onNavigateForward: () => switchScreen(6)),
-                  const MovementReg7Image(),
+                    onNavigateForward: () => switchScreen(5),
+                    elevatorAccessible: saveElevator,
+                  ),
+                  MovementReg6Ramp(
+                    onNavigateForward: () => switchScreen(6),
+                    rampAccessible: saveRamp,
+                  ),
+                  MovementReg7Image(
+                    saveImages: saveImage,
+                  ),
                 ],
               ),
             ),

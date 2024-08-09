@@ -3,10 +3,12 @@ import 'package:mapda/constants/definition/constants.dart';
 
 class MovementReg4RestRoom extends StatefulWidget {
   final VoidCallback onNavigateForward;
+  final Function(Map<String, int>) restRoomExistAndFloor;
 
   const MovementReg4RestRoom({
     super.key,
     required this.onNavigateForward,
+    required this.restRoomExistAndFloor,
   });
 
   @override
@@ -128,7 +130,13 @@ class _MovementReg4RestRoomState extends State<MovementReg4RestRoom> {
                 NextButton(
                   thisText: '다음으로',
                   isReady: selectedIndex != 0,
-                  thisTap: widget.onNavigateForward,
+                  thisTap: () {
+                    widget.onNavigateForward();
+                    widget.restRoomExistAndFloor({
+                      'restRoomExist': selectedIndex,
+                      'restRoomFloor': selectedFloorIndex,
+                    });
+                  },
                 ),
               ],
             ),

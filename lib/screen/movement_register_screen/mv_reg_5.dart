@@ -3,10 +3,12 @@ import 'package:mapda/constants/definition/constants.dart';
 
 class MovementReg5Elevator extends StatefulWidget {
   final VoidCallback onNavigateForward;
+  final Function(int) elevatorAccessible;
 
   const MovementReg5Elevator({
     super.key,
     required this.onNavigateForward,
+    required this.elevatorAccessible,
   });
 
   @override
@@ -91,7 +93,10 @@ class _MovementReg5ElevatorState extends State<MovementReg5Elevator> {
                 NextButton(
                   thisText: '다음으로',
                   isReady: selectedIndex != 0,
-                  thisTap: widget.onNavigateForward,
+                  thisTap: () {
+                    widget.onNavigateForward();
+                    widget.elevatorAccessible(selectedIndex);
+                  },
                 ),
               ],
             ),
