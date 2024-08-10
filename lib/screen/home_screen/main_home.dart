@@ -15,14 +15,15 @@ class MainHome extends StatefulWidget {
 
 class _MainHomeState extends State<MainHome> {
   final Completer<NaverMapController> mapControllerCompleter = Completer();
-  int listItemCount = 20;
   List<ObjectListModel> objectList = [];
+  List<PlaceListModel> placeList = [];
   bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
     fetchObjectList();
+    fetchPlaceList();
   }
 
   Future<void> fetchObjectList() async {
@@ -31,8 +32,10 @@ class _MainHomeState extends State<MainHome> {
           await ObjectApiManage.getDangerObjectList();
       setState(() {
         objectList = objects;
-        isLoading = false;
       });
+      if (mapControllerCompleter.isCompleted) {
+        await _addMarkersToMapForObject();
+      }
     } catch (e) {
       setState(() {
         isLoading = false;
@@ -40,24 +43,63 @@ class _MainHomeState extends State<MainHome> {
     }
   }
 
+  Future<void> fetchPlaceList() async {
+    try {
+      List<PlaceListModel> places = await ObjectApiManage.getPlaceList();
+      setState(() {
+        placeList = places;
+        isLoading = false;
+      });
+      if (mapControllerCompleter.isCompleted) {
+        await _addMarkersToMapForPlace();
+      }
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  Future<void> _addMarkersToMapForObject() async {
+    final naverMapController = await mapControllerCompleter.future;
+    final markerManager = MapMarkerManager(context, naverMapController);
+    await markerManager.addMarkersToMapForObject(objectList);
+  }
+
+  Future<void> _addMarkersToMapForPlace() async {
+    final naverMapController = await mapControllerCompleter.future;
+    final markerManager = MapMarkerManager(context, naverMapController);
+    await markerManager.addMarkersToMapForPlace(placeList);
+  }
+
   Widget _buildNaverMap() {
-    // 네이버 지도 위젯 생성
-    return const NaverMap(
-      options: NaverMapViewOptions(
+    return NaverMap(
+      options: const NaverMapViewOptions(
         liteModeEnable: true,
-        indoorEnable: true, // 실내 맵 사용 가능 여부 설정
-        locationButtonEnable: false, // 위치 버튼 표시 여부 설정
-        consumeSymbolTapEvents: true, // 심볼 탭 이벤트 소비 여부 설정
+        indoorEnable: true,
+        locationButtonEnable: false,
+        consumeSymbolTapEvents: true,
         logoMargin: EdgeInsets.only(bottom: 30, left: 24),
         logoAlign: NLogoAlign.leftBottom,
         logoClickEnable: false,
         initialCameraPosition: NCameraPosition(
-            target: NLatLng(37.5802, 126.923), zoom: 17), //카메라 초기 위치 설정
-        // extent: NLatLngBounds(
-        //   southWest: NLatLng(37.578595, 126.921763),
-        //   northEast: NLatLng(37.581663, 126.924718), // 지도 영역 설정
-        // ),
+          target: NLatLng(37.5802, 126.923),
+          zoom: 16,
+        ),
+        extent: NLatLngBounds(
+          southWest: NLatLng(37.578595, 126.921763),
+          northEast: NLatLng(37.581663, 126.924718),
+        ),
       ),
+      onMapReady: (naverMapController) {
+        mapControllerCompleter.complete(naverMapController);
+        if (objectList.isNotEmpty) {
+          _addMarkersToMapForObject();
+        }
+        if (placeList.isNotEmpty) {
+          _addMarkersToMapForPlace();
+        }
+      },
     );
   }
 
@@ -224,7 +266,6 @@ class _MainHomeState extends State<MainHome> {
       behavior: HitTestBehavior.translucent,
       child: Scaffold(
         body: Stack(
-          // Stack 위젯으로 레이어 분리
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.85,
@@ -233,8 +274,7 @@ class _MainHomeState extends State<MainHome> {
             gpsButton(),
             placeRegisterButton(),
             Positioned(
-              // 검색 창 위치 지정
-              top: 54, // 검색창 위치를 위쪽으로 조절
+              top: 54,
               left: 24,
               right: 24,
               child: Container(
@@ -262,7 +302,7 @@ class _MainHomeState extends State<MainHome> {
                 ),
               ),
             ),
-            dangerListModal(), // DraggableScrollableSheet는 Stack의 자식으로 배치
+            dangerListModal(),
           ],
         ),
       ),

@@ -38,7 +38,7 @@ class _MovementReg2LocationState extends State<MovementReg2Location> {
   Future<NOverlayImage> _createOverlayImage() async {
     return await NOverlayImage.fromWidget(
       widget: AppIcon.marker_blue_24,
-      size: const Size(56, 56),
+      size: const Size(40, 40),
       context: context,
     );
   }

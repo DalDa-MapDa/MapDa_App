@@ -27,3 +27,6 @@ export 'package:mapda/widget/snack_bar/custom_snackbar.dart'; //커스텀 스낵
 
 //시간표
 export 'package:mapda/widget/timetable/timetable_widget.dart'; //시간표 위젯
+
+//네이버맵 마커
+export 'package:mapda/widget/navermap_marker/map_marker_manager.dart'; //네이버맵 마커 매니저
