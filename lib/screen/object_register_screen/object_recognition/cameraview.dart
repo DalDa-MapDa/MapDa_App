@@ -52,7 +52,6 @@ class CameraViewState extends State<CameraView> with WidgetsBindingObserver {
   // 카메라를 초기화하고 cameraController를 설정
   void initializeCamera() async {
     cameras = await availableCameras();
-    print('가능한 카메라: $cameras');
     // cameras[0]은 후면 카메라
     cameraController =
         CameraController(cameras![1], ResolutionPreset.low, enableAudio: false);

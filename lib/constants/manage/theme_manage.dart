@@ -23,6 +23,7 @@ class ThemeManage {
       ),
       appBarTheme: const AppBarTheme(
         color: AppColors.s_w,
+        centerTitle: false,
       ),
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: AppColors.s_w,
