@@ -1,3 +1,6 @@
+문제: UnmodifiableUint8ListView 자료형이 플러터에서 지원되지 않음.
+해결: 다른 방식으로 인식할 수 있도록 우회
+
 """
 Launching lib/main.dart on sdk gphone64 arm64 in debug mode...
 ../../../.pub-cache/hosted/pub.dev/tflite_flutter-0.9.1/lib/src/tensor.dart:38:12: Error: The method 'UnmodifiableUint8ListView' isn't defined for the class 'Tensor'.
