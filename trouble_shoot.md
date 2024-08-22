@@ -3,7 +3,7 @@ Launching lib/main.dart on sdk gphone64 arm64 in debug mode...
 ../../../.pub-cache/hosted/pub.dev/tflite_flutter-0.9.1/lib/src/tensor.dart:38:12: Error: The method 'UnmodifiableUint8ListView' isn't defined for the class 'Tensor'.
  - 'Tensor' is from 'package:tflite_flutter/src/tensor.dart' ('../../../.pub-cache/hosted/pub.dev/tflite_flutter-0.9.1/lib/src/tensor.dart').
 Try correcting the name to the name of an existing method, or defining a method named 'UnmodifiableUint8ListView'.
-    return UnmodifiableUint8ListView(
+    return UnmodifiableUint8ListView
            ^^^^^^^^^^^^^^^^^^^^^^^^^
 Target kernel_snapshot_program failed: Exception
 
