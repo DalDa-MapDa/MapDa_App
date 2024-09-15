@@ -62,14 +62,14 @@ class _MainHomeState extends State<MainHome> {
 
   Future<void> _addMarkersToMapForObject() async {
     final naverMapController = await mapControllerCompleter.future;
-    final markerManager = MapMarkerManager(context, naverMapController);
-    await markerManager.addMarkersToMapForObject(objectList);
+    final objectMarkerManager = MapMarkerManager(context, naverMapController);
+    await objectMarkerManager.addMarkersToMapForObject(objectList);
   }
 
   Future<void> _addMarkersToMapForPlace() async {
     final naverMapController = await mapControllerCompleter.future;
-    final markerManager = MapMarkerManager(context, naverMapController);
-    await markerManager.addMarkersToMapForPlace(placeList);
+    final placeMarkerManager = MapMarkerManager(context, naverMapController);
+    await placeMarkerManager.addMarkersToMapForPlace(placeList);
   }
 
   Widget _buildNaverMap() {

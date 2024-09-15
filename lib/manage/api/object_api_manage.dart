@@ -6,8 +6,8 @@ import 'package:mapda/constants/manage/model_manage.dart';
 import 'package:http_parser/http_parser.dart'; // http_parser 패키지 임포트
 
 class ObjectApiManage {
-  // static String baseUrl = "http://10.0.2.2:8000";
-  static String baseUrl = "https://api.mapda.site";
+  static String baseUrl = "http://10.0.2.2:8000";
+  // static String baseUrl = "https://api.mapda.site";
   static final Dio _dio = Dio();
 
   // 위험 물체 리스트 GET 메소드
@@ -152,12 +152,11 @@ class ObjectApiManage {
   // 장소 리스트 GET 메소드
   static Future<List<PlaceListModel>> getPlaceList() async {
     final response = await http.get(Uri.parse('$baseUrl/get_place_list'));
-
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(utf8.decode(response.bodyBytes));
       return data.map((item) => PlaceListModel.fromJson(item)).toList();
     } else {
-      throw Exception('Failed to load place list');
+      throw Exception('장소정보 로드 실패');
     }
   }
 }

@@ -59,10 +59,8 @@ class MapMarkerManager {
 
   Future<void> addMarkersToMapForPlace(List<PlaceListModel> placeList) async {
     for (var place in placeList) {
-      final NOverlayImage placeMarker = await NOverlayImage.fromWidget(
-        widget: AppIcon.marker_blue_24,
-        size: const Size(24, 24),
-        context: context,
+      const NOverlayImage placeMarker = NOverlayImage.fromAssetImage(
+        'assets/icon/png/pin_blue.png',
       );
 
       final marker = NMarker(

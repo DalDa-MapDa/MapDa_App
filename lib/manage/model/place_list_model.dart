@@ -37,13 +37,13 @@ class PlaceListModel {
       longitude: json['longitude'],
       restRoomExist: json['rest_room_exist'],
       elevatorAccessible: json['elevator_accessible'],
-      inDoorImageUrls: (json['in_door_image_urls'] as String).split(','),
+      inDoorImageUrls: List<String>.from(json['indoor_images']),
       id: json['id'],
       placeName: json['place_name'],
       wheeleChairAccessible: json['wheele_chait_accessible'],
       restRoomFloor: json['rest_room_floor'],
       rampAccessible: json['ramp_accessible'],
-      outDoorImageUrls: (json['out_door_image_urls'] as String).split(','),
+      outDoorImageUrls: List<String>.from(json['outdoor_images']),
     );
   }
 }
