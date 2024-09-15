@@ -6,8 +6,8 @@ import 'package:mapda/constants/manage/model_manage.dart';
 import 'package:http_parser/http_parser.dart'; // http_parser 패키지 임포트
 
 class ObjectApiManage {
-  static String baseUrl = "http://10.0.2.2:8000";
-  // static String baseUrl = "https://api.mapda.site";
+  // static String baseUrl = "http://10.0.2.2:8000";
+  static String baseUrl = "https://api.mapda.site";
   static final Dio _dio = Dio();
 
   // 위험 물체 리스트 GET 메소드
