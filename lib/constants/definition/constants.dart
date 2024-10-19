@@ -17,6 +17,7 @@ export 'package:mapda/widget/textfield/custom_textfield.dart'; //커스텀 텍�
 export 'package:mapda/widget/button/next_button.dart'; //다음 버튼
 export 'package:mapda/widget/button/accesible_button.dart'; //접근성 버튼
 export 'package:mapda/widget/button/chips_button.dart'; //칩 버튼
+export 'package:mapda/widget/button/login_button.dart'; //로그인 버튼
 
 //리스트 컴포넌트
 export 'package:mapda/widget/list_component/home_danger_list.dart'; //홈_위험 물체 리스트

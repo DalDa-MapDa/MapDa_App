@@ -8,6 +8,9 @@ export 'package:mapda/screen/object_register_screen/object_recognition/isolateut
 export 'package:mapda/screen/object_register_screen/object_recognition/camera_home_screen.dart'; //객체 인식 화면
 export 'package:mapda/screen/object_register_screen/object_recognition/imageutils.dart'; //이미지 처리 유틸리티
 
+//로그인 화면
+export 'package:mapda/screen/login_onboard_screen/login_screen_0_1.dart'; //로그인 화면
+
 //Object 등록화면
 export 'package:mapda/screen/object_register_screen/object_register_home.dart'; //객체 등록 화면
 

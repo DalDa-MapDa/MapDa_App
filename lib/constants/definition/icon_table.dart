@@ -14,6 +14,15 @@ class AppIcon {
       SvgPicture.asset('assets/icon/other/elevator.svg', fit: BoxFit.scaleDown);
   static Widget get ramp =>
       SvgPicture.asset('assets/icon/other/ramp.svg', fit: BoxFit.scaleDown);
+  static Widget get kakao_logo =>
+      SvgPicture.asset('assets/icon/other/kakao_logo.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get apple_logo_black =>
+      SvgPicture.asset('assets/icon/other/apple_logo_black.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get apple_logo_white =>
+      SvgPicture.asset('assets/icon/other/apple_logo_white.svg',
+          fit: BoxFit.scaleDown);
 
   // bottom navigation bar icons
   static Widget get gnb_camera_24_actived =>
