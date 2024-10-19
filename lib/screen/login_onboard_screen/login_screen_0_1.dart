@@ -39,9 +39,6 @@ class LoginScreenState extends State<LoginScreen> {
       final identityToken = appleCredential.identityToken;
       final authorizationCode = appleCredential.authorizationCode;
 
-      print('identityToken: $identityToken');
-      print('authorizationCode: $authorizationCode');
-
       // FastAPI로 POST 요청 보내기
       final response = await http.post(
         Uri.parse('https://api.mapda.site/login/apple'), // FastAPI 서버 URL로 변경
