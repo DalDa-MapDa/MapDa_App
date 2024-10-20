@@ -9,6 +9,10 @@ export 'package:mapda/constants/manage/theme_manage.dart'; //테마 설정
 export 'package:mapda/manage/util/image_to_utf8.dart'; //카메라 이미지 변환
 export 'package:mapda/manage/util/date_formater.dart'; //날짜 포맷팅
 
+//api
+export 'package:mapda/manage/api/login_api_manage.dart'; //로그인 API 매니저
+export 'package:mapda/manage/api/object_api_manage.dart'; //객체 등록 API 매니저
+
 //컴포넌트
 export 'package:mapda/widget/bottom_navigation/gnb_tap.dart';
 export 'package:mapda/widget/topapp_bar/custom_appbar.dart'; //커스텀 앱바

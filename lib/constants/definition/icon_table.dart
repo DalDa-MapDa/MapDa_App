@@ -23,6 +23,9 @@ class AppIcon {
   static Widget get apple_logo_white =>
       SvgPicture.asset('assets/icon/other/apple_logo_white.svg',
           fit: BoxFit.scaleDown);
+  static Widget get google_logo =>
+      SvgPicture.asset('assets/icon/other/google_logo.svg',
+          fit: BoxFit.scaleDown);
 
   // bottom navigation bar icons
   static Widget get gnb_camera_24_actived =>

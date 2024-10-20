@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mapda/constants/definition/constants.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert'; // JSON 인코딩을 위해 추가
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,42 +20,6 @@ class LoginScreenState extends State<LoginScreen> {
         systemNavigationBarColor: Color(0xffFF5C5C), // 네비게이션 바 색상
       ),
     );
-  }
-
-  // 애플 로그인 메소드
-  Future<void> signInWithApple() async {
-    try {
-      final appleCredential = await SignInWithApple.getAppleIDCredential(
-        scopes: [
-          AppleIDAuthorizationScopes.email,
-          AppleIDAuthorizationScopes.fullName,
-        ],
-      );
-
-      // 애플 서버로부터 받은 토큰과 코드를 FastAPI 서버로 전송
-      final identityToken = appleCredential.identityToken;
-      final authorizationCode = appleCredential.authorizationCode;
-
-      // FastAPI로 POST 요청 보내기
-      final response = await http.post(
-        Uri.parse('https://api.mapda.site/login/apple'), // FastAPI 서버 URL로 변경
-        headers: <String, String>{
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(<String, String>{
-          'identityToken': identityToken!,
-          'authorizationCode': authorizationCode,
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        print('로그인 성공');
-      } else {
-        print('로그인 실패: ${response.statusCode}');
-      }
-    } catch (error) {
-      print('애플 로그인 중 오류 발생: $error');
-    }
   }
 
   @override
@@ -109,11 +70,19 @@ class LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: [
                       LoginButton(
+                        thisColor: AppColors.s_w,
+                        thisText: 'Sign in with Google',
+                        thisTextColor: const Color(0xff3C4043),
+                        thisIcon: AppIcon.google_logo,
+                        thisTap: () => LoginApiManage.loginWithGoogle(),
+                      ),
+                      Gaps.v10,
+                      LoginButton(
                         thisColor: AppColors.s_b,
                         thisText: '애플로 계속하기',
                         thisTextColor: AppColors.s_w,
                         thisIcon: AppIcon.apple_logo_white,
-                        thisTap: () => signInWithApple(),
+                        thisTap: () => LoginApiManage.loginWithApple(),
                       ),
                       Gaps.v10,
                       LoginButton(
