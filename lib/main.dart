@@ -9,6 +9,7 @@ import 'package:mapda/constants/manage/screen_mange.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _naverMapInitailize();
+
   runApp(const MyApp());
 }
 

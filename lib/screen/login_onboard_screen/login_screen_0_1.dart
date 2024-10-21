@@ -90,7 +90,7 @@ class LoginScreenState extends State<LoginScreen> {
                         thisText: '카카오 로그인',
                         thisTextColor: AppColors.s_b,
                         thisIcon: AppIcon.kakao_logo,
-                        thisTap: () {},
+                        thisTap: () => LoginApiManage.loginWithKakao(),
                       ),
                     ],
                   ),
