@@ -1,9 +1,9 @@
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'dart:convert';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:kakao_flutter_sdk_auth/kakao_flutter_sdk_auth.dart';
 
 class LoginApiManage {
   static const String BaseUrl = 'https://api.mapda.site';
@@ -89,28 +89,68 @@ class LoginApiManage {
     }
   }
 
-// 카카오 로그인 메소드
+  // 카카오 로그인 메소드
   static Future<void> loginWithKakao() async {
-    bool talkInstalled = await isKakaoTalkInstalled();
-
-    if (talkInstalled) {
-      // 카카오톡으로 로그인
+    if (await isKakaoTalkInstalled()) {
       try {
-        await AuthCodeClient.instance.authorizeWithTalk(
-          redirectUri: '$BaseUrl/login/kakao/auth',
-        );
+        await UserApi.instance.loginWithKakaoTalk();
+        print('카카오톡으로 로그인 성공');
+        await _getKakaoUserInfo(); // 로그인 성공 시 사용자 정보 서버에 전송
       } catch (error) {
-        print('Login with Kakao Talk fails $error');
+        print('카카오톡으로 로그인 실패 $error');
+
+        if (error is PlatformException && error.code == 'CANCELED') {
+          return;
+        }
+
+        try {
+          await UserApi.instance.loginWithKakaoAccount();
+          print('카카오계정으로 로그인 성공');
+          await _getKakaoUserInfo(); // 로그인 성공 시 사용자 정보 서버에 전송
+        } catch (error) {
+          print('카카오계정으로 로그인 실패 $error');
+        }
       }
     } else {
-      // 카카오계정으로 로그인
       try {
-        await AuthCodeClient.instance.authorize(
-          redirectUri: '$BaseUrl/login/kakao/auth',
-        );
+        await UserApi.instance.loginWithKakaoAccount();
+        print('카카오계정으로 로그인 성공');
+        await _getKakaoUserInfo(); // 로그인 성공 시 사용자 정보 서버에 전송
       } catch (error) {
-        print('Login with Kakao Account fails. $error');
+        print('카카오계정으로 로그인 실패 $error');
       }
+    }
+  }
+
+  // 카카오 사용자 정보 가져오기 및 서버로 전송 메소드
+  static Future<void> _getKakaoUserInfo() async {
+    try {
+      User user = await UserApi.instance.me();
+      print('사용자 정보 요청 성공\n모든 회원정보: $user');
+
+      // 서버에 사용자 정보 전송
+      final response = await http.post(
+        Uri.parse('$BaseUrl/login/kakao'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'id': user.id.toString(),
+          'nickname': user.kakaoAccount?.profile?.nickname,
+          'email': user.kakaoAccount?.email,
+          'profileImage': user.kakaoAccount?.profile?.profileImageUrl,
+          'thumbnailImage': user.kakaoAccount?.profile?.thumbnailImageUrl,
+          'connectedAt': user.connectedAt.toString(),
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        print('서버에 사용자 정보 전송 성공: ${response.body}');
+      } else {
+        print('서버에 사용자 정보 전송 실패: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('사용자 정보 요청 또는 서버 전송 실패 $error');
     }
   }
 }
