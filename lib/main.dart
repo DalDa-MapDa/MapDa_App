@@ -3,12 +3,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:kakao_flutter_sdk_auth/kakao_flutter_sdk_auth.dart';
 import 'package:mapda/constants/definition/constants.dart';
 import 'package:mapda/constants/manage/screen_mange.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _naverMapInitailize();
+
+  // runApp() 호출 전 Flutter SDK 초기화
+  KakaoSdk.init(
+    nativeAppKey: '4b11a77bcd3c1d521e329c21b0bb28e6',
+    javaScriptAppKey: '9fe4294ba28ea53cb38911428c544267',
+  );
 
   runApp(const MyApp());
 }
