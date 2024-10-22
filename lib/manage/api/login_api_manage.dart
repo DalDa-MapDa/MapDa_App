@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -61,6 +63,9 @@ class LoginApiManage {
 
       final String? idToken = googleAuth.idToken;
       final String? accessToken = googleAuth.accessToken;
+
+      print('idToken: $idToken');
+      print('accessToken: $accessToken');
 
       if (idToken == null || accessToken == null) {
         print('토큰을 가져오는 데 실패했습니다.');
