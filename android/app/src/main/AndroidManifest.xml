@@ -1,14 +1,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dalda.mapda">
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 카메라 사용 권한 설정-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 정확한 위치 접근 권한 설정-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 대략적인 위치 접근 권한 설정-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> <!-- 외부 저장소 읽기 권한 설정-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> <!-- 외부 저장소 사용 권한 설정-->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 인터넷 사용 권한 설정-->
     <application
         android:label="맵다 Map:Da"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+            <!-- 구글 클라이언트 ID 설정 -->
+        <meta-data
+            android:name="com.google.android.gms.auth.api.credentials.CLIENT_ID"
+            android:value="734591230931-r8617l4j827unrqsvd1vmue25ef7u13t.apps.googleusercontent.com" />
+
 
             <!-- 카카오 로그인 커스텀 URL 스킴 설정 -->
         <activity 

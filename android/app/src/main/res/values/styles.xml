@@ -15,4 +15,6 @@
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
+    <!-- Google Sign In -->
+    <string name="default_web_client_id">734591230931-tqcf13jecei0qbf4odq73m0d9jppo1pl.apps.googleusercontent.com</string>
 </resources>

@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -49,11 +51,13 @@ class LoginApiManage {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn(
         scopes: ['email'],
+        clientId: Platform.isAndroid
+            ? '734591230931-tqcf13jecei0qbf4odq73m0d9jppo1pl.apps.googleusercontent.com'
+            : null, // iOS에서는 clientId를 생략
       );
 
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
-        // 로그인 취소됨
         print('로그인 취소됨');
         return;
       }
@@ -73,24 +77,30 @@ class LoginApiManage {
       }
 
       // 서버로 토큰 전송
-      final response = await http.post(
-        Uri.parse('$BaseUrl/login/google'),
-        headers: <String, String>{
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(<String, String>{
-          'idToken': idToken,
-          'accessToken': accessToken,
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        print('로그인 성공: ${response.body}');
-      } else {
-        print('로그인 실패: ${response.statusCode}');
-      }
+      await _sendTokensToServer(idToken, accessToken);
     } catch (error) {
       print('구글 로그인 중 오류 발생: $error');
+    }
+  }
+
+  // 서버로 토큰 전송 메소드
+  static Future<void> _sendTokensToServer(
+      String idToken, String accessToken) async {
+    final response = await http.post(
+      Uri.parse('$BaseUrl/login/google'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, String>{
+        'idToken': idToken,
+        'accessToken': accessToken,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      print('로그인 성공: ${response.body}');
+    } else {
+      print('로그인 실패: ${response.statusCode}');
     }
   }
 
