@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mapda/constants/definition/constants.dart';
@@ -79,14 +77,14 @@ class LoginScreenState extends State<LoginScreen> {
                         thisTap: () => LoginApiManage.loginWithGoogle(),
                       ),
                       Gaps.v10,
-                      if (Platform.isIOS) // ios 일때만 애플 로그인 버튼 표시
-                        LoginButton(
-                          thisColor: AppColors.s_b,
-                          thisText: '애플로 계속하기',
-                          thisTextColor: const Color.fromRGBO(255, 255, 255, 1),
-                          thisIcon: AppIcon.apple_logo_white,
-                          thisTap: () => LoginApiManage.loginWithApple(),
-                        ),
+                      // if (Platform.isIOS) // ios 일때만 애플 로그인 버튼 표시
+                      LoginButton(
+                        thisColor: AppColors.s_b,
+                        thisText: '애플로 계속하기',
+                        thisTextColor: const Color.fromRGBO(255, 255, 255, 1),
+                        thisIcon: AppIcon.apple_logo_white,
+                        thisTap: () => LoginApiManage.loginWithApple(),
+                      ),
                       Gaps.v10,
                       LoginButton(
                         thisColor: const Color(0xffFEE500),

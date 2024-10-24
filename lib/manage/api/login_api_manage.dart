@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -12,7 +11,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class LoginApiManage {
   static const String BaseUrl = 'https://api.mapda.site';
 
-  // 애플 로그인 메소드
+// 애플 로그인 메소드
   static Future<void> loginWithApple() async {
     try {
       final appleCredential = await SignInWithApple.getAppleIDCredential(
@@ -20,10 +19,17 @@ class LoginApiManage {
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],
+        webAuthenticationOptions: WebAuthenticationOptions(
+          clientId: 'com.dalda.mapda',
+          redirectUri: Uri.parse('$BaseUrl/login/apple'),
+        ),
       );
 
       final identityToken = appleCredential.identityToken;
       final authorizationCode = appleCredential.authorizationCode;
+      final userEmail = appleCredential.email;
+      final userName =
+          "${appleCredential.familyName}${appleCredential.givenName}";
 
       final response = await http.post(
         Uri.parse('$BaseUrl/login/apple'),
@@ -33,6 +39,8 @@ class LoginApiManage {
         body: jsonEncode(<String, String>{
           'identityToken': identityToken!,
           'authorizationCode': authorizationCode,
+          'userEmail': userEmail ?? '',
+          'userName': userName,
         }),
       );
 
@@ -142,6 +150,8 @@ class LoginApiManage {
     try {
       User user = await UserApi.instance.me();
       print('사용자 정보 요청 성공\n모든 회원정보: $user');
+      print('기본 프로필 이미지 여부: ${user.kakaoAccount?.profile?.isDefaultImage}');
+      print('유저 이메일: ${user.kakaoAccount?.email}');
 
       // 서버에 사용자 정보 전송
       final response = await http.post(
@@ -154,6 +164,7 @@ class LoginApiManage {
           'nickname': user.kakaoAccount?.profile?.nickname,
           'email': user.kakaoAccount?.email,
           'profileImage': user.kakaoAccount?.profile?.profileImageUrl,
+          'isProfileImageDefault': user.kakaoAccount?.profile?.isDefaultImage,
           'thumbnailImage': user.kakaoAccount?.profile?.thumbnailImageUrl,
           'connectedAt': user.connectedAt.toString(),
         }),
