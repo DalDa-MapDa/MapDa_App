@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mapda/constants/definition/constants.dart';
 
+//로그인 타입 지정
+enum LoginType {
+  GOOGLE,
+  APPLE,
+  KAKAO,
+}
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -20,6 +27,34 @@ class LoginScreenState extends State<LoginScreen> {
         systemNavigationBarColor: Color(0xffFF5C5C), // 네비게이션 바 색상
       ),
     );
+  }
+
+  Future<void> loginMethod(LoginType loginType) async {
+    int? statusCode; // statusCode 변수 선언
+
+    // 로그인 메소드 호출
+    switch (loginType) {
+      case LoginType.GOOGLE:
+        statusCode = await LoginApiManage.loginWithGoogle();
+        break;
+      case LoginType.APPLE:
+        statusCode = await LoginApiManage.loginWithApple();
+        break;
+      case LoginType.KAKAO:
+        statusCode = await LoginApiManage.loginWithKakao();
+        break;
+    }
+
+    // 응답 상태 코드에 따른 동작
+    if (statusCode == 200) {
+      print('로그인 성공');
+    } else if (statusCode == 201 || statusCode == 202) {
+      print('특정 동작 수행: 서버 응답 코드 $statusCode');
+      // 여기에 원하는 동작 추가
+      // 예: Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      print('로그인 실패 또는 다른 응답 코드: $statusCode');
+    }
   }
 
   @override
@@ -74,16 +109,15 @@ class LoginScreenState extends State<LoginScreen> {
                         thisText: 'Sign in with Google',
                         thisTextColor: const Color(0xff3C4043),
                         thisIcon: AppIcon.google_logo,
-                        thisTap: () => LoginApiManage.loginWithGoogle(),
+                        thisTap: () => loginMethod(LoginType.GOOGLE), // 구글 로그인
                       ),
                       Gaps.v10,
-                      // if (Platform.isIOS) // ios 일때만 애플 로그인 버튼 표시
                       LoginButton(
                         thisColor: AppColors.s_b,
                         thisText: '애플로 계속하기',
                         thisTextColor: const Color.fromRGBO(255, 255, 255, 1),
                         thisIcon: AppIcon.apple_logo_white,
-                        thisTap: () => LoginApiManage.loginWithApple(),
+                        thisTap: () => loginMethod(LoginType.APPLE), // 애플 로그인
                       ),
                       Gaps.v10,
                       LoginButton(
@@ -91,7 +125,7 @@ class LoginScreenState extends State<LoginScreen> {
                         thisText: '카카오 로그인',
                         thisTextColor: AppColors.s_b,
                         thisIcon: AppIcon.kakao_logo,
-                        thisTap: () => LoginApiManage.loginWithKakao(),
+                        thisTap: () => loginMethod(LoginType.KAKAO), // 카카오 로그인
                       ),
                     ],
                   ),

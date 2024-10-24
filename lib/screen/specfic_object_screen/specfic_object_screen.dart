@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mapda/constants/definition/constants.dart';
-import 'package:mapda/manage/api/object_api_manage.dart';
 import 'package:mapda/constants/manage/model_manage.dart';
 
 class SpecificObjectScreen extends StatefulWidget {

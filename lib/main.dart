@@ -23,7 +23,6 @@ void main() async {
 Future<void> _naverMapInitailize() async {
   await NaverMapSdk.instance.initialize(
     clientId: 'piicuaz1z8',
-    onAuthFailed: (e) => print('네이버 지도 인증 실패: $e'),
   );
 }
 

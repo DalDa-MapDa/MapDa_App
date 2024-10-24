@@ -4,7 +4,6 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:mapda/constants/definition/constants.dart';
 import 'package:mapda/constants/manage/model_manage.dart';
 import 'package:mapda/constants/manage/screen_mange.dart';
-import 'package:mapda/manage/api/object_api_manage.dart';
 
 class MainHome extends StatefulWidget {
   const MainHome({super.key});

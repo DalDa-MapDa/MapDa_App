@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mapda/constants/definition/constants.dart';
 import 'package:mapda/constants/manage/screen_mange.dart';
-import 'package:mapda/manage/api/object_api_manage.dart';
 
 class MovementRegIntergrate extends StatefulWidget {
   const MovementRegIntergrate({super.key});
